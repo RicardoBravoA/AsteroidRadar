@@ -12,7 +12,9 @@ import com.udacity.asteroid.radar.model.Asteroid
 class MainFragment : Fragment() {
 
     private val mainViewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this, MainViewModelFactory(requireActivity().application)).get(
+            MainViewModel::class.java
+        )
     }
 
     override fun onCreateView(

@@ -12,7 +12,12 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     val detailItemList: LiveData<List<DetailItem>>
         get() = _detailItemList
 
+    private val _potentiallyHazardous = MutableLiveData<Boolean>()
+    val potentiallyHazardous: LiveData<Boolean>
+        get() = _potentiallyHazardous
+
     fun transformData(asteroid: Asteroid) {
+        _potentiallyHazardous.value = asteroid.isPotentiallyHazardous
         val list: List<DetailItem> =
             DetailMapper.transform(getApplication<Application>().baseContext, asteroid)
         _detailItemList.value = list
