@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/status_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/item_image_size"
+        android:layout_height="@dimen/item_image_size"
         android:contentDescription="@string/potentially_hazardous_asteroid_image"
-        android:padding="@dimen/dimen_16_dp"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

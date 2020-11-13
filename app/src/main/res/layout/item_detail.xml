@@ -7,10 +7,9 @@
 
     <ImageView
         android:id="@+id/help_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/item_image_size"
+        android:layout_height="@dimen/item_image_size"
         android:contentDescription="@string/astronomical_unit_explanation_button"
-        android:padding="@dimen/dimen_16_dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
