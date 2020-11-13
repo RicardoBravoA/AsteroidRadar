@@ -5,8 +5,8 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.network.NetworkUtils
 import com.udacity.asteroid.radar.util.NetworkStatus
+import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -32,11 +32,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 //                val value = AsteroidRadarApi.retrofitService.feed(startDate, endDate)
                 delay(2000)
                 _asteroidList.value = NetworkUtils.parseStringToAsteroidList(context)
+//                _asteroidList.value = NetworkUtils.parseStringToAsteroidList(value)
                 _status.value = NetworkStatus.DONE
             } catch (e: Exception) {
                 _status.value = NetworkStatus.ERROR
-                Log.i("z- value", "${e.toString()}")
-//                _properties.value = ArrayList()
+                Log.i("z- value", e.toString())
+                _asteroidList.value = arrayListOf()
             }
         }
     }
