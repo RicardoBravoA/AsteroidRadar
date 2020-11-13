@@ -33,7 +33,7 @@ class DetailFragment : Fragment() {
             viewModel.transformData(asteroid)
         }
 
-        val detailAdapter = DetailAdapter()
+        val detailAdapter = DetailAdapter(::helpClick)
 
         binding.detailRecyclerView.adapter = detailAdapter
 
@@ -46,7 +46,7 @@ class DetailFragment : Fragment() {
         return binding.root
     }
 
-    private fun displayAstronomicalUnitExplanationDialog() {
+    private fun helpClick() {
         val builder = AlertDialog.Builder(requireActivity())
             .setMessage(getString(R.string.astronomical_unit_explanation))
             .setPositiveButton(android.R.string.ok, null)
