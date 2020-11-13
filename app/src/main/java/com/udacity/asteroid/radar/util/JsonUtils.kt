@@ -6,10 +6,10 @@ import java.io.InputStream
 
 object JsonUtils {
 
-    fun loadJSONFromAsset(context: Context): String? {
+    fun loadJSONFromAsset(context: Context, file: String): String? {
         val json: String?
         json = try {
-            val inputStream: InputStream = context.assets.open("asteroids.json")
+            val inputStream: InputStream = context.assets.open(file)
             val size: Int = inputStream.available()
             val buffer = ByteArray(size)
             inputStream.read(buffer)
