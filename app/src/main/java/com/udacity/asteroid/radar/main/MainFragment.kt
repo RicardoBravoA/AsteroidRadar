@@ -27,10 +27,6 @@ class MainFragment : Fragment() {
         val mainAdapter = MainAdapter()
 
         binding.asteroidRecyclerView.adapter = mainAdapter
-        binding.asteroidRecyclerView.setHasFixedSize(true)
-
-        mainViewModel.getFeed("2020-11-12", "2020-11-19", requireContext())
-
 
         mainViewModel.asteroidList.observe(viewLifecycleOwner, {
             it?.let {
