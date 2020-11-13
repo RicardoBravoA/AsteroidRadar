@@ -28,9 +28,6 @@ class MainFragment : Fragment() {
 
         binding.asteroidRecyclerView.adapter = mainAdapter
 
-        mainViewModel.getFeed("2020-11-12", "2020-11-19", requireContext())
-
-
         mainViewModel.asteroidList.observe(viewLifecycleOwner, {
             it?.let {
                 mainAdapter.submitList(it)
