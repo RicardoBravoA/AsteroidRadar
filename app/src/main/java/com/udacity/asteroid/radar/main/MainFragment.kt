@@ -24,6 +24,8 @@ class MainFragment : Fragment() {
 
         setHasOptionsMenu(true)
 
+        viewModel.getFeed("2020-11-12", "2020-11-19", requireContext())
+
         return binding.root
     }
 
