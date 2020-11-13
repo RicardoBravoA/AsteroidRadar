@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_size"
             android:adjustViewBounds="true"
-            android:contentDescription="@string/image_of_the_day"
+            android:contentDescription="@string/this_is_nasa_s_picture_of_day_showing_nothing_yet"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
