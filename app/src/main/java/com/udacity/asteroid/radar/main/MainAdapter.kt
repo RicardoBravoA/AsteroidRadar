@@ -31,6 +31,7 @@ class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallba
 
     class MainViewHolder(private var binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(asteroid: Asteroid) {
             binding.titleTextView.text = asteroid.codename
             binding.descriptionTextView.text = asteroid.closeApproachDate
