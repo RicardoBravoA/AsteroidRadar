@@ -15,17 +15,18 @@
         android:layout_height="match_parent"
         android:background="@color/app_background">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/image_of_the_day"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_size"
-            android:adjustViewBounds="true"
+            android:background="@drawable/placeholder_picture_of_day"
             android:contentDescription="@string/this_is_nasa_s_picture_of_day_showing_nothing_yet"
             android:scaleType="centerCrop"
+            app:imageNetworkStatus="@{viewModel.imageStatus}"
+            app:imageUrl="@{viewModel.imageOfTheDay.url}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/placeholder_picture_of_day" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/image_of_the_day_text_view"

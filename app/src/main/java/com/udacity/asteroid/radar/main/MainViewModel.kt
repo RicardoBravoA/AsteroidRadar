@@ -6,8 +6,6 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.model.Asteroid
 import com.udacity.asteroid.radar.model.ImageOfTheDay
-import com.udacity.asteroid.radar.network.ApiManager
-import com.udacity.asteroid.radar.network.ApiManagerMoshi
 import com.udacity.asteroid.radar.util.NetworkStatus
 import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.delay
@@ -33,7 +31,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         getFeed("2020-11-12", "2020-11-19", application.baseContext)
-        getImageOfTheDay()
+        getImageOfTheDay(application.baseContext)
     }
 
     private fun getFeed(startDate: String, endDate: String, context: Context) {
@@ -42,7 +40,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             try {
 //                val value = ApiManager.get().feed(startDate, endDate)
                 delay(2000)
-                _asteroidList.value = NetworkUtils.parseStringToAsteroidList(context)
+                _asteroidList.value =
+                    NetworkUtils.parseStringToAsteroidList(context)
 //                _asteroidList.value = NetworkUtils.parseStringToAsteroidList(value)
                 _status.value = NetworkStatus.DONE
             } catch (e: Exception) {
@@ -53,11 +52,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private fun getImageOfTheDay() {
+    private fun getImageOfTheDay(context: Context) {
         viewModelScope.launch {
             _imageStatus.value = NetworkStatus.LOADING
             try {
-                _imageOfTheDay.value = ApiManagerMoshi.get().imageOfTheDay()
+//                _imageOfTheDay.value = ApiManagerMoshi.get().imageOfTheDay()
+                delay(3000)
+                _imageOfTheDay.value = NetworkUtils.parseImageOfTheDay(context)
                 _imageStatus.value = NetworkStatus.DONE
             } catch (e: Exception) {
                 _imageStatus.value = NetworkStatus.ERROR

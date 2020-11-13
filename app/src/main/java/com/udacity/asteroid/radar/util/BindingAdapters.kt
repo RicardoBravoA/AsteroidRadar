@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.main.MainAdapter
 import com.udacity.asteroid.radar.model.Asteroid
@@ -59,8 +60,9 @@ fun RecyclerView.bindRecyclerViewAdapter(adapter: RecyclerView.Adapter<*>) {
     this.adapter = adapter
 }
 
-@BindingAdapter("networkStatus")
+@BindingAdapter("imageNetworkStatus")
 fun ImageView.bindNetworkStatus(status: NetworkStatus?) {
+    scaleType = ImageView.ScaleType.CENTER_INSIDE
     when (status) {
         NetworkStatus.LOADING -> {
             visibility = View.VISIBLE
@@ -71,7 +73,7 @@ fun ImageView.bindNetworkStatus(status: NetworkStatus?) {
             setImageResource(R.drawable.ic_no_photo)
         }
         NetworkStatus.DONE -> {
-            visibility = View.GONE
+            visibility = View.VISIBLE
         }
     }
 }
@@ -88,5 +90,17 @@ fun ProgressBar.showProgressBar(status: NetworkStatus?) {
         NetworkStatus.DONE -> {
             visibility = View.GONE
         }
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun ImageView.bindImage(url: String?) {
+
+    url?.let {
+        Picasso.get()
+            .load(url)
+            .error(R.drawable.ic_no_photo)
+            .into(this)
+        scaleType = ImageView.ScaleType.CENTER_CROP
     }
 }

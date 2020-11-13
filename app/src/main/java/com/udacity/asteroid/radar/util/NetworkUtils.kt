@@ -2,6 +2,7 @@ package com.udacity.asteroid.radar.util
 
 import android.content.Context
 import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.model.ImageOfTheDay
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -9,8 +10,25 @@ import kotlin.collections.ArrayList
 
 object NetworkUtils {
 
+    fun parseImageOfTheDay(context: Context): ImageOfTheDay {
+        val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
+        var imageOfTheDay = ImageOfTheDay("", "", "", "", "")
+
+        response?.let {
+            val jsonObject = JSONObject(response)
+            val copyright = jsonObject.getString("copyright")
+            val date = jsonObject.getString("date")
+            val explanation = jsonObject.getString("explanation")
+            val title = jsonObject.getString("title")
+            val url = jsonObject.getString("url")
+
+            imageOfTheDay = ImageOfTheDay(copyright, date, explanation, title, url)
+        }
+        return imageOfTheDay
+    }
+
     fun parseStringToAsteroidList(context: Context): List<Asteroid> {
-        val response = JsonUtils.loadJSONFromAsset(context)
+        val response = JsonUtils.loadJSONFromAsset(context, "asteroids.json")
         val asteroidList = mutableListOf<Asteroid>()
 
         response?.let {
