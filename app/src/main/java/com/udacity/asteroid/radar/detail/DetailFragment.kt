@@ -22,9 +22,9 @@ class DetailFragment : Fragment() {
             binding.asteroid = asteroid
         }
 
-        binding.helpButton.setOnClickListener {
+        /*binding.helpButton.setOnClickListener {
             displayAstronomicalUnitExplanationDialog()
-        }
+        }*/
 
         return binding.root
     }
