@@ -4,13 +4,17 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dimen_16_dp"
+        android:paddingTop="@dimen/dimen_16_dp"
+        android:paddingEnd="@dimen/dimen_0_dp"
+        android:paddingBottom="@dimen/dimen_16_dp">
 
         <TextView
             android:id="@+id/title_text_view"
+            style="@style/MainItemTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/default_text_color"
             app:layout_constraintBottom_toTopOf="@+id/description_text_view"
             app:layout_constraintEnd_toStartOf="@+id/status_image_view"
             app:layout_constraintHorizontal_bias="0.5"
@@ -20,9 +24,9 @@
 
         <TextView
             android:id="@+id/description_text_view"
+            style="@style/MainItemSubTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/default_text_color"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/status_image_view"
             app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +38,7 @@
             android:layout_width="@dimen/item_image_size"
             android:layout_height="@dimen/item_image_size"
             android:contentDescription="@string/potentially_hazardous_asteroid_image"
-            android:scaleType="centerInside"
+            android:padding="@dimen/dimen_16_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
