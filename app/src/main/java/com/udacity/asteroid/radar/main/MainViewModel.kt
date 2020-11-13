@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroid.radar.network.AsteroidRadarApi
+import com.udacity.asteroid.radar.util.Constants
 import com.udacity.asteroid.radar.util.NetworkStatus
 import kotlinx.coroutines.launch
 
@@ -24,7 +25,8 @@ class MainViewModel : ViewModel() {
             _status.value = NetworkStatus.LOADING
             try {
 //                _properties.value = AsteroidRadarApi.retrofitService.feed(startDate, endDate)
-                val value = AsteroidRadarApi.retrofitService.feed(startDate, endDate)
+//                val value = AsteroidRadarApi.retrofitService.feed(startDate, endDate)
+                val value = Constants.DATA_RESPONSE
                 Log.i("z- value", value)
                 _status.value = NetworkStatus.DONE
             } catch (e: Exception) {

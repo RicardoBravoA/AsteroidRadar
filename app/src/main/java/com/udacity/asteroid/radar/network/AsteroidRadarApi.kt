@@ -6,7 +6,7 @@ import com.udacity.asteroid.radar.util.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object AsteroidRadarApi {
 
@@ -22,7 +22,8 @@ object AsteroidRadarApi {
         .build()
 
     private val retrofit = Retrofit.Builder()
-        .addConverterFactory(MoshiConverterFactory.create(moshi))
+//        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addConverterFactory(ScalarsConverterFactory.create())
         .baseUrl(Constants.BASE_URL)
         .client(client)
         .build()
