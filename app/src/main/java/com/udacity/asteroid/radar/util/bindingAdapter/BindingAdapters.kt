@@ -1,15 +1,12 @@
-package com.udacity.asteroid.radar.util
+package com.udacity.asteroid.radar.util.bindingAdapter
 
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.udacity.asteroid.radar.R
-import com.udacity.asteroid.radar.main.MainAdapter
-import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.util.NetworkStatus
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -47,37 +44,6 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
 }
 
-@BindingAdapter("asteroidData")
-fun RecyclerView.bindRecyclerView(data: List<Asteroid>?) {
-    val recyclerAdapter = adapter as MainAdapter
-    recyclerAdapter.submitList(data)
-    setHasFixedSize(true)
-}
-
-@BindingAdapter("adapter")
-fun RecyclerView.bindRecyclerViewAdapter(adapter: RecyclerView.Adapter<*>) {
-    setHasFixedSize(true)
-    this.adapter = adapter
-}
-
-@BindingAdapter("imageNetworkStatus")
-fun ImageView.bindNetworkStatus(status: NetworkStatus?) {
-    scaleType = ImageView.ScaleType.CENTER_INSIDE
-    when (status) {
-        NetworkStatus.LOADING -> {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.animation_loading)
-        }
-        NetworkStatus.ERROR -> {
-            visibility = View.VISIBLE
-            setImageResource(R.drawable.ic_no_photo)
-        }
-        NetworkStatus.DONE -> {
-            visibility = View.VISIBLE
-        }
-    }
-}
-
 @BindingAdapter("showProgressBar")
 fun ProgressBar.showProgressBar(status: NetworkStatus?) {
     when (status) {
@@ -93,14 +59,3 @@ fun ProgressBar.showProgressBar(status: NetworkStatus?) {
     }
 }
 
-@BindingAdapter("imageUrl")
-fun ImageView.bindImage(url: String?) {
-
-    url?.let {
-        Picasso.get()
-            .load(url)
-            .error(R.drawable.ic_no_photo)
-            .into(this)
-        scaleType = ImageView.ScaleType.CENTER_CROP
-    }
-}
