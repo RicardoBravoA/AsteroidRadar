@@ -1,3 +1,7 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="dimen_16_dp">16dp</dimen>
+    <dimen name="image_size">220dp</dimen>
+    <dimen name="dimen_20_sp">20sp</dimen>
+    <dimen name="item_image_size">80dp</dimen>
 </resources>
