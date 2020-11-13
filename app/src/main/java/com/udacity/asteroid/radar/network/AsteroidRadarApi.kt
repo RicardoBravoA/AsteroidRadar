@@ -1,5 +1,6 @@
 package com.udacity.asteroid.radar.network
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroid.radar.util.Constants
@@ -10,9 +11,9 @@ import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object AsteroidRadarApi {
 
-    private val moshi = Moshi.Builder()
+    /*private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
-        .build()
+        .build()*/
 
     private val logging = HttpLoggingInterceptor()
         .setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -24,6 +25,7 @@ object AsteroidRadarApi {
     private val retrofit = Retrofit.Builder()
 //        .addConverterFactory(MoshiConverterFactory.create(moshi))
         .addConverterFactory(ScalarsConverterFactory.create())
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl(Constants.BASE_URL)
         .client(client)
         .build()
