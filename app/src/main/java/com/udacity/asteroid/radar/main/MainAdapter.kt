@@ -3,6 +3,7 @@ package com.udacity.asteroid.radar.main
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,7 +15,10 @@ class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallba
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        return MainViewHolder(ItemMainBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding: ItemMainBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context), R.layout.item_main, parent, false
+        )
+        return MainViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
@@ -32,14 +36,10 @@ class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallba
             binding.descriptionTextView.text = asteroid.closeApproachDate
 
             if (asteroid.isPotentiallyHazardous) {
-                binding.statusImageView.setBackgroundResource(R.drawable.ic_status_potentially_hazardous)
+                binding.statusImageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
             } else {
-                binding.statusImageView.setBackgroundResource(R.drawable.ic_status_normal)
+                binding.statusImageView.setImageResource(R.drawable.ic_status_normal)
             }
-//            binding.property = marsProperty
-            // This is important, because it forces the data binding to execute immediately,
-            // which allows the RecyclerView to make the correct view size measurements
-//            binding.executePendingBindings()
         }
     }
 
