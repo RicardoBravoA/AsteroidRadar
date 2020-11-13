@@ -9,7 +9,7 @@ import com.udacity.asteroid.radar.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by lazy {
+    private val mainViewModel: MainViewModel by lazy {
         ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
@@ -20,9 +20,24 @@ class MainFragment : Fragment() {
         val binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        binding.viewModel = viewModel
+        binding.viewModel = mainViewModel
 
         setHasOptionsMenu(true)
+
+        val mainAdapter = MainAdapter()
+
+        binding.asteroidRecyclerView.adapter = mainAdapter
+        binding.asteroidRecyclerView.setHasFixedSize(true)
+
+        mainViewModel.getFeed("2020-11-12", "2020-11-19", requireContext())
+
+
+        mainViewModel.asteroidList.observe(viewLifecycleOwner, {
+            it?.let {
+                mainAdapter.submitList(it)
+            }
+        })
+
 
         return binding.root
     }
