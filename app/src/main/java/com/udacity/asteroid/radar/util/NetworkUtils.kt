@@ -12,7 +12,7 @@ object NetworkUtils {
 
     fun parseImageOfTheDay(context: Context): ImageOfTheDay {
         val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
-        var imageOfTheDay = ImageOfTheDay("", "", "", "", "")
+        var imageOfTheDay = ImageOfTheDay("", "", "", "", "", "")
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -21,8 +21,9 @@ object NetworkUtils {
             val explanation = jsonObject.getString("explanation")
             val title = jsonObject.getString("title")
             val url = jsonObject.getString("url")
+            val mediaType = jsonObject.getString("media_type")
 
-            imageOfTheDay = ImageOfTheDay(copyright, date, explanation, title, url)
+            imageOfTheDay = ImageOfTheDay(copyright, date, explanation, title, url, mediaType)
         }
         return imageOfTheDay
     }

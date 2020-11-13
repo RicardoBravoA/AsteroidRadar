@@ -3,26 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/MainFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
+        android:id="@+id/MainFragment"
         android:name="com.udacity.asteroid.radar.main.MainFragment"
-        android:label="fragment_main"
+        android:label="@string/fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_showDetail"
-            app:destination="@id/detailFragment" />
+            android:id="@+id/action_show_detail"
+            app:destination="@id/DetailFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/detailFragment"
+        android:id="@+id/DetailFragment"
         android:name="com.udacity.asteroid.radar.detail.DetailFragment"
-        android:label="fragment_detail"
+        android:label="@string/fragment_detail"
         tools:layout="@layout/fragment_detail">
 
         <argument
-            android:name="selectedAsteroid"
+            android:name="asteroid"
             app:argType="com.udacity.asteroid.radar.model.Asteroid" />
     </fragment>
 </navigation>

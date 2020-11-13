@@ -29,13 +29,19 @@
         <item name="android:background">@color/background_image_of_the_day_text</item>
     </style>
 
-    <style name="MainItemTitle" parent="BaseTextView">
+    <style name="ItemTitle" parent="BaseTextView">
         <item name="android:textSize">@dimen/dimen_18_sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MainItemSubTitle" parent="BaseTextView">
+    <style name="ItemSubTitle" parent="BaseTextView">
         <item name="android:textSize">@dimen/dimen_16_sp</item>
+    </style>
+
+    <style name="ItemList">
+        <item name="android:paddingStart">@dimen/dimen_16_dp</item>
+        <item name="android:paddingTop">@dimen/dimen_16_dp</item>
+        <item name="android:paddingBottom">@dimen/dimen_16_dp</item>
     </style>
 
 </resources>

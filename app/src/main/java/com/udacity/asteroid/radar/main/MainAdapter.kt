@@ -1,6 +1,5 @@
 package com.udacity.asteroid.radar.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -11,7 +10,8 @@ import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.model.Asteroid
 
-class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallback) {
+class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
+    ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallback) {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
@@ -24,7 +24,7 @@ class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallba
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
         val asteroid = getItem(position)
         holder.itemView.setOnClickListener {
-            Log.i("z- click", asteroid.toString())
+            asteroidClick(asteroid)
         }
         holder.bind(asteroid)
     }
@@ -35,7 +35,6 @@ class MainAdapter : ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallba
         fun bind(asteroid: Asteroid) {
             binding.titleTextView.text = asteroid.codename
             binding.descriptionTextView.text = asteroid.closeApproachDate
-
             if (asteroid.isPotentiallyHazardous) {
                 binding.statusImageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
             } else {
