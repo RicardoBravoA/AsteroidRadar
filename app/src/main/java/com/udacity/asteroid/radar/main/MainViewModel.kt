@@ -2,12 +2,11 @@ package com.udacity.asteroid.radar.main
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.*
-import com.udacity.asteroid.radar.model.Asteroid
 import com.udacity.asteroid.radar.model.PictureOfTheDay
 import com.udacity.asteroid.radar.util.NetworkStatus
 import com.udacity.asteroid.radar.util.NetworkUtils
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -17,12 +16,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val status: LiveData<NetworkStatus>
         get() = _status
 
-    private val _imageStatus = MutableLiveData<NetworkStatus>()
-    val imageStatus: LiveData<NetworkStatus>
-        get() = _imageStatus
-
-    private val _asteroidList = MutableLiveData<List<Asteroid>>()
-    val asteroidList: LiveData<List<Asteroid>>
+    private val _asteroidList = MutableLiveData<List<MainItem>>()
+    val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
     private val _imageOfTheDay = MutableLiveData<PictureOfTheDay>()
@@ -30,11 +25,38 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _imageOfTheDay
 
     init {
-        getFeed("2020-11-12", "2020-11-19", application.baseContext)
-        getImageOfTheDay(application.baseContext)
+        /*getFeed("2020-11-12", "2020-11-19", application.baseContext)
+        getImageOfTheDay(application.baseContext)*/
+        getData(application.baseContext)
     }
 
-    private fun getFeed(startDate: String, endDate: String, context: Context) {
+    private fun getData(context: Context) {
+        viewModelScope.launch {
+            _status.value = NetworkStatus.LOADING
+            try {
+                delay(500)
+                coroutineScope {
+                    val items = NetworkUtils.parseStringToAsteroidList(context)
+                    val picture = NetworkUtils.parseImageOfTheDay(context)
+
+                    val list = mutableListOf<MainItem>()
+                    list.add(MainItem.Picture(picture.url))
+
+                    items.forEach {
+                        list.add(MainItem.Item(it))
+                    }
+                    _status.value = NetworkStatus.DONE
+
+                    _asteroidList.postValue(list)
+                }
+            } catch (e: java.lang.Exception) {
+                _status.value = NetworkStatus.ERROR
+                _asteroidList.value = arrayListOf()
+            }
+        }
+    }
+
+    /*private fun getFeed(startDate: String, endDate: String, context: Context) {
         viewModelScope.launch {
             _status.value = NetworkStatus.LOADING
             try {
@@ -65,6 +87,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 Log.i("z- value", e.toString())
             }
         }
-    }
+    }*/
 
 }

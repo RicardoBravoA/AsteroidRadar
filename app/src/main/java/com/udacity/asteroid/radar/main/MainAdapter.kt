@@ -9,7 +9,6 @@ import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.util.NetworkStatus
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindNetworkStatus
 
@@ -78,7 +77,6 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(picture: MainItem.Picture) {
-            binding.imageOfTheDay.bindNetworkStatus(picture.networkStatus)
             binding.imageOfTheDay.bindImage(picture.url)
         }
 
@@ -103,16 +101,4 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
         }
     }
 
-}
-
-sealed class MainItem {
-    data class Item(val asteroid: Asteroid) : MainItem() {
-        override val id = asteroid.id
-    }
-
-    data class Picture(val networkStatus: NetworkStatus, val url: String) : MainItem() {
-        override val id = Long.MIN_VALUE
-    }
-
-    abstract val id: Long
 }
