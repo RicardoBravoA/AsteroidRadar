@@ -21,8 +21,8 @@ object DetailMapper {
                 context.getString(R.string.absolute_magnitude_title),
                 String.format(
                     context.getString(R.string.astronomical_unit_format),
-                    asteroid.absoluteMagnitude, true
-                )
+                    asteroid.absoluteMagnitude
+                ), true
             )
 
         val estimatedDiameter =
