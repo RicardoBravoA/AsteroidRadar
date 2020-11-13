@@ -2,7 +2,7 @@ package com.udacity.asteroid.radar.util
 
 import android.content.Context
 import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.model.ImageOfTheDay
+import com.udacity.asteroid.radar.model.PictureOfTheDay
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -10,9 +10,9 @@ import kotlin.collections.ArrayList
 
 object NetworkUtils {
 
-    fun parseImageOfTheDay(context: Context): ImageOfTheDay {
+    fun parseImageOfTheDay(context: Context): PictureOfTheDay {
         val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
-        var imageOfTheDay = ImageOfTheDay("", "", "", "", "", "")
+        var imageOfTheDay = PictureOfTheDay("", "", "", "", "", "")
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -23,7 +23,7 @@ object NetworkUtils {
             val url = jsonObject.getString("url")
             val mediaType = jsonObject.getString("media_type")
 
-            imageOfTheDay = ImageOfTheDay(copyright, date, explanation, title, url, mediaType)
+            imageOfTheDay = PictureOfTheDay(copyright, date, explanation, title, url, mediaType)
         }
         return imageOfTheDay
     }

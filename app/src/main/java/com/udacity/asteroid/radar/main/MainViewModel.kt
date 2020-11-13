@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.model.ImageOfTheDay
+import com.udacity.asteroid.radar.model.PictureOfTheDay
 import com.udacity.asteroid.radar.util.NetworkStatus
 import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.delay
@@ -25,8 +25,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList: LiveData<List<Asteroid>>
         get() = _asteroidList
 
-    private val _imageOfTheDay = MutableLiveData<ImageOfTheDay>()
-    val imageOfTheDay: LiveData<ImageOfTheDay>
+    private val _imageOfTheDay = MutableLiveData<PictureOfTheDay>()
+    val pictureOfTheDay: LiveData<PictureOfTheDay>
         get() = _imageOfTheDay
 
     init {

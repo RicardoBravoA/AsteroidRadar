@@ -9,7 +9,7 @@ import com.udacity.asteroid.radar.model.Asteroid
 fun RecyclerView.bindRecyclerView(data: List<Asteroid>?) {
     val recyclerAdapter = adapter as MainAdapter
     recyclerAdapter.submitList(data)
-    setHasFixedSize(true)
+    setHasFixedSize(false)
 }
 
 @BindingAdapter("adapter")
