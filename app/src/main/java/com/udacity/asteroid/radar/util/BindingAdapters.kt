@@ -47,39 +47,46 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
 }
 
 @BindingAdapter("asteroidData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Asteroid>?) {
-    val adapter = recyclerView.adapter as MainAdapter
-    adapter.submitList(data)
+fun RecyclerView.bindRecyclerView(data: List<Asteroid>?) {
+    val recyclerAdapter = adapter as MainAdapter
+    recyclerAdapter.submitList(data)
+    setHasFixedSize(true)
 }
 
-@BindingAdapter("marsApiStatus")
-fun bindNetworkStatus(statusImageView: ImageView, status: NetworkStatus?) {
+@BindingAdapter("adapter")
+fun RecyclerView.bindRecyclerViewAdapter(adapter: RecyclerView.Adapter<*>) {
+    setHasFixedSize(true)
+    this.adapter = adapter
+}
+
+@BindingAdapter("networkStatus")
+fun ImageView.bindNetworkStatus(status: NetworkStatus?) {
     when (status) {
         NetworkStatus.LOADING -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.animation_loading)
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.animation_loading)
         }
         NetworkStatus.ERROR -> {
-            statusImageView.visibility = View.VISIBLE
-            statusImageView.setImageResource(R.drawable.ic_no_photo)
+            visibility = View.VISIBLE
+            setImageResource(R.drawable.ic_no_photo)
         }
         NetworkStatus.DONE -> {
-            statusImageView.visibility = View.GONE
+            visibility = View.GONE
         }
     }
 }
 
 @BindingAdapter("showProgressBar")
-fun showProgressBar(progressBar: ProgressBar, status: NetworkStatus?) {
+fun ProgressBar.showProgressBar(status: NetworkStatus?) {
     when (status) {
         NetworkStatus.LOADING -> {
-            progressBar.visibility = View.VISIBLE
+            visibility = View.VISIBLE
         }
         NetworkStatus.ERROR -> {
-            progressBar.visibility = View.GONE
+            visibility = View.GONE
         }
         NetworkStatus.DONE -> {
-            progressBar.visibility = View.GONE
+            visibility = View.GONE
         }
     }
 }
