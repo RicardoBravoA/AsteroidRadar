@@ -39,7 +39,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _status.value = NetworkStatus.LOADING
             try {
 //                val value = ApiManager.get().feed(startDate, endDate)
-                delay(2000)
+                delay(500)
                 _asteroidList.value =
                     NetworkUtils.parseStringToAsteroidList(context)
 //                _asteroidList.value = NetworkUtils.parseStringToAsteroidList(value)
@@ -57,7 +57,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             _imageStatus.value = NetworkStatus.LOADING
             try {
 //                _imageOfTheDay.value = ApiManagerMoshi.get().imageOfTheDay()
-                delay(3000)
+                delay(500)
                 _imageOfTheDay.value = NetworkUtils.parseImageOfTheDay(context)
                 _imageStatus.value = NetworkStatus.DONE
             } catch (e: Exception) {
