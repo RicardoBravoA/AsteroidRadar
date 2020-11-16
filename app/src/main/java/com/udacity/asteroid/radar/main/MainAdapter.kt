@@ -89,7 +89,6 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
         }
     }
 
-
     companion object DiffCallback : DiffUtil.ItemCallback<MainItem>() {
         override fun areItemsTheSame(oldItem: MainItem, newItem: MainItem): Boolean {
             return oldItem === newItem

@@ -44,12 +44,12 @@ class DetailAdapter(private val helpClick: () -> Unit) :
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<DetailItem>() {
-        override fun areItemsTheSame(oldItem: DetailItem, newItem: DetailItem): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<DetailModel>() {
+        override fun areItemsTheSame(oldItem: DetailModel, newItem: DetailModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: DetailItem, newItem: DetailItem): Boolean {
+        override fun areContentsTheSame(oldItem: DetailModel, newItem: DetailModel): Boolean {
             return oldItem.title == newItem.title
         }
     }
