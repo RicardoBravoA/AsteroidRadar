@@ -16,42 +16,17 @@
         android:layout_height="match_parent"
         android:background="@color/app_background">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_of_the_day"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/image_size"
-            android:background="@drawable/placeholder_picture_of_day"
-            android:contentDescription="@string/this_is_nasa_s_picture_of_day_showing_nothing_yet"
-            android:scaleType="centerCrop"
-            app:imageNetworkStatus="@{viewModel.imageStatus}"
-            app:imageUrl="@{viewModel.imageOfTheDay.url}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/image_of_the_day_text_view"
-            style="@style/ImageOfTheDayTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:text="@string/image_of_the_day"
-            app:layout_constraintBottom_toBottomOf="@+id/image_of_the_day"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/asteroid_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:clipToPadding="false"
-            app:asteroidData="@{viewModel.asteroidList}"
-            tools:listitem="@layout/item_main"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_of_the_day" />
+            app:layout_constraintTop_toBottomOf="parent"
+            tools:listitem="@layout/item_main" />
 
         <ProgressBar
             android:id="@+id/main_progress_bar"

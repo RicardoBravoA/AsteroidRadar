@@ -1,6 +1,6 @@
 package com.udacity.asteroid.radar.network
 
-import com.udacity.asteroid.radar.model.ImageOfTheDay
+import com.udacity.asteroid.radar.model.PictureOfTheDay
 import com.udacity.asteroid.radar.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,8 +15,8 @@ interface ApiInterface {
     ): String
 
     @GET("planetary/apod")
-    suspend fun imageOfTheDay(
+    suspend fun pictureOfTheDay(
         @Query("api_key") apiKey: String = Constants.KEY
-    ): ImageOfTheDay
+    ): PictureOfTheDay
 
 }
