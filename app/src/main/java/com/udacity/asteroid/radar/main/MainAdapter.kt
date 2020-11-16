@@ -10,7 +10,6 @@ import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.model.Asteroid
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
-import com.udacity.asteroid.radar.util.bindingAdapter.bindNetworkStatus
 
 class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
     ListAdapter<MainItem, RecyclerView.ViewHolder>(DiffCallback) {
