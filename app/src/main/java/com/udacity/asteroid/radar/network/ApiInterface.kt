@@ -15,7 +15,7 @@ interface ApiInterface {
     ): String
 
     @GET("planetary/apod")
-    suspend fun imageOfTheDay(
+    suspend fun pictureOfTheDay(
         @Query("api_key") apiKey: String = Constants.KEY
     ): PictureOfTheDay
 
