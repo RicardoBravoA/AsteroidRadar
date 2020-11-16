@@ -4,23 +4,16 @@ import android.app.Application
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.mapper.DetailMapper
 import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.model.DetailItem
 
 class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _detailItemList = MutableLiveData<List<DetailItem>>()
-    val detailItemList: LiveData<List<DetailItem>>
+    private val _detailItemList = MutableLiveData<List<DetailModel>>()
+    val detailItemList: LiveData<List<DetailModel>>
         get() = _detailItemList
 
-    private val _potentiallyHazardous = MutableLiveData<Boolean>()
-    val potentiallyHazardous: LiveData<Boolean>
-        get() = _potentiallyHazardous
-
     fun transformData(asteroid: Asteroid) {
-        _potentiallyHazardous.value = asteroid.isPotentiallyHazardous
-        val list: List<DetailItem> =
+        _detailItemList.value =
             DetailMapper.transform(getApplication<Application>().baseContext, asteroid)
-        _detailItemList.value = list
 
     }
 

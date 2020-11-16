@@ -2,12 +2,26 @@ package com.udacity.asteroid.radar.mapper
 
 import android.content.Context
 import com.udacity.asteroid.radar.R
+import com.udacity.asteroid.radar.detail.DetailModel
 import com.udacity.asteroid.radar.model.Asteroid
 import com.udacity.asteroid.radar.model.DetailItem
 
 object DetailMapper {
 
-    fun transform(context: Context, asteroid: Asteroid): List<DetailItem> {
+    fun transform(context: Context, asteroid: Asteroid): List<DetailModel> {
+        val list = mutableListOf<DetailModel>()
+        list.add(DetailModel.Picture(asteroid.isPotentiallyHazardous))
+
+        val detailList = transformItem(context, asteroid)
+
+        detailList.forEach {
+            list.add(DetailModel.Item(it))
+        }
+
+        return list
+    }
+
+    private fun transformItem(context: Context, asteroid: Asteroid): List<DetailItem> {
         val detailList = mutableListOf<DetailItem>()
 
         val closeApproach =

@@ -2,53 +2,95 @@ package com.udacity.asteroid.radar.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
+import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
+import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
 class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
-    ListAdapter<Asteroid, MainAdapter.MainViewHolder>(DiffCallback) {
+    ListAdapter<MainItem, RecyclerView.ViewHolder>(DiffCallback) {
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val binding: ItemMainBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(parent.context), R.layout.item_main, parent, false
-        )
-        return MainViewHolder(binding)
+    enum class Type {
+        PICTURE, ITEM
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
-        val asteroid = getItem(position)
-        holder.itemView.setOnClickListener {
-            asteroidClick(asteroid)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            Type.PICTURE.ordinal -> PictureHolder.from(parent)
+            Type.ITEM.ordinal -> ItemViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType $viewType")
         }
-        holder.bind(asteroid)
     }
 
-    class MainViewHolder(private var binding: ItemMainBinding) :
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is PictureHolder -> {
+                val picture = getItem(position) as MainItem.Picture
+                holder.bind(picture)
+            }
+            is ItemViewHolder -> {
+                val item = getItem(position) as MainItem.Item
+                holder.itemView.setOnClickListener {
+                    asteroidClick(item.asteroid)
+                }
+                holder.bind(item.asteroid)
+            }
+        }
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is MainItem.Picture -> Type.PICTURE.ordinal
+            is MainItem.Item -> Type.ITEM.ordinal
+        }
+    }
+
+    class ItemViewHolder(private var binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(asteroid: Asteroid) {
             binding.titleTextView.text = asteroid.codename
             binding.descriptionTextView.text = asteroid.closeApproachDate
-            if (asteroid.isPotentiallyHazardous) {
-                binding.statusImageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
-            } else {
-                binding.statusImageView.setImageResource(R.drawable.ic_status_normal)
+            binding.statusImageView.bindAsteroidStatusImage(asteroid.isPotentiallyHazardous)
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): RecyclerView.ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemMainBinding.inflate(layoutInflater, parent, false)
+
+                return ItemViewHolder(binding)
             }
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Asteroid>() {
-        override fun areItemsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+    class PictureHolder(private var binding: ItemPictureOfTheDayBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(picture: MainItem.Picture) {
+            binding.imageOfTheDay.bindImage(picture.url)
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): RecyclerView.ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ItemPictureOfTheDayBinding.inflate(layoutInflater, parent, false)
+
+                return PictureHolder(binding)
+            }
+        }
+    }
+
+    companion object DiffCallback : DiffUtil.ItemCallback<MainItem>() {
+        override fun areItemsTheSame(oldItem: MainItem, newItem: MainItem): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: Asteroid, newItem: Asteroid): Boolean {
+        override fun areContentsTheSame(oldItem: MainItem, newItem: MainItem): Boolean {
             return oldItem.id == newItem.id
         }
     }
