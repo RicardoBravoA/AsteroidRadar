@@ -7,7 +7,7 @@ sealed class DetailModel {
         override val id = Long.MIN_VALUE
     }
 
-    data class Picture(val url: String) :
+    data class Picture(val isPotentiallyHazardous: Boolean) :
         DetailModel() {
         override val id = Long.MIN_VALUE
     }
