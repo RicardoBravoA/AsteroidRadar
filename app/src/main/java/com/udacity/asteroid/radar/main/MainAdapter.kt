@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
 class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
@@ -55,11 +55,7 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
         fun bind(asteroid: Asteroid) {
             binding.titleTextView.text = asteroid.codename
             binding.descriptionTextView.text = asteroid.closeApproachDate
-            if (asteroid.isPotentiallyHazardous) {
-                binding.statusImageView.setImageResource(R.drawable.ic_status_potentially_hazardous)
-            } else {
-                binding.statusImageView.setImageResource(R.drawable.ic_status_normal)
-            }
+            binding.statusImageView.bindAsteroidStatusImage(asteroid.isPotentiallyHazardous)
         }
 
         companion object {

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroid.radar.databinding.ItemDetailBinding
 import com.udacity.asteroid.radar.databinding.ItemDetailPictureBinding
 import com.udacity.asteroid.radar.model.DetailItem
+import com.udacity.asteroid.radar.util.bindingAdapter.bindDetailsStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 import com.udacity.asteroid.radar.util.bindingAdapter.show
 
@@ -71,7 +72,7 @@ class DetailAdapter(private val helpClick: () -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(picture: DetailModel.Picture) {
-            binding.potentialImageView.bindImage(picture.url)
+            binding.potentialImageView.bindDetailsStatusImage(picture.isPotentiallyHazardous)
         }
 
         companion object {

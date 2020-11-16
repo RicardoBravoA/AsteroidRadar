@@ -16,3 +16,21 @@ fun ImageView.bindImage(url: String?) {
         scaleType = ImageView.ScaleType.CENTER_CROP
     }
 }
+
+@BindingAdapter("statusIcon")
+fun ImageView.bindAsteroidStatusImage(isHazardous: Boolean) {
+    if (isHazardous) {
+        setImageResource(R.drawable.ic_status_potentially_hazardous)
+    } else {
+        setImageResource(R.drawable.ic_status_normal)
+    }
+}
+
+@BindingAdapter("asteroidStatusImage")
+fun ImageView.bindDetailsStatusImage(isHazardous: Boolean) {
+    if (isHazardous) {
+        setImageResource(R.drawable.asteroid_hazardous)
+    } else {
+        setImageResource(R.drawable.asteroid_safe)
+    }
+}
