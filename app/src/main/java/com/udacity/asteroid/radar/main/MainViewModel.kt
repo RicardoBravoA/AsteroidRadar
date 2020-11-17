@@ -19,10 +19,8 @@ class MainViewModel(private val asteroidUseCase: AsteroidUseCase) : ViewModel() 
     val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
-    /*private val database =
-        com.udacity.asteroid.radar.data.storage.AsteroidDatabase.getDatabase(application.baseContext)
-    private val asteroidRepository = AsteroidRepository(database)
-    private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)*/
+    /*
+   private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)*/
 
     init {
 //        getFeed("2020-11-16", "2020-11-23")
