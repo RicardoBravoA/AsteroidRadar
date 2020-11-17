@@ -3,7 +3,6 @@ package com.udacity.asteroid.radar.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroid.radar.data.storage.AsteroidDatabase
-import com.udacity.asteroid.radar.mapper.AsteroidMapper
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.data.network.ApiManager
 import com.udacity.asteroid.radar.util.NetworkUtils
