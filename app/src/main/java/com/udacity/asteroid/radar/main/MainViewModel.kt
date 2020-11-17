@@ -3,9 +3,6 @@ package com.udacity.asteroid.radar.main
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.*
-import com.udacity.asteroid.radar.model.PictureOfTheDay
-import com.udacity.asteroid.radar.network.ApiManager
-import com.udacity.asteroid.radar.network.ApiManagerMoshi
 import com.udacity.asteroid.radar.util.NetworkStatus
 import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.coroutineScope
