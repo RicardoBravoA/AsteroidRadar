@@ -8,5 +8,5 @@ import androidx.room.OnConflictStrategy
 interface AsteroidDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg videos: AsteroidVideo)
+    fun insertAll(vararg videos: AsteroidDatabase)
 }
