@@ -27,7 +27,7 @@ class DetailFragment : Fragment() {
         binding.viewModel = viewModel
 
         arguments?.let {
-            val asteroid = DetailFragmentArgs.fromBundle(it).asteroid
+            val asteroid = DetailFragmentArgs.fromBundle(it).asteroidModel
             viewModel.transformData(asteroid)
         }
 

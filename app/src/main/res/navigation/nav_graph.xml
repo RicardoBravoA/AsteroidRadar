@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_detail">
 
         <argument
-            android:name="asteroid"
-            app:argType="com.udacity.asteroid.radar.model.Asteroid" />
+            android:name="asteroidModel"
+            app:argType="com.udacity.asteroid.radar.model.AsteroidModel" />
     </fragment>
 </navigation>

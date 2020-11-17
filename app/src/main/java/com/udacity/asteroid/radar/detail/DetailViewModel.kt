@@ -3,7 +3,7 @@ package com.udacity.asteroid.radar.detail
 import android.app.Application
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.mapper.DetailMapper
-import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.model.AsteroidModel
 
 class DetailViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -11,9 +11,9 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     val detailItemList: LiveData<List<DetailModel>>
         get() = _detailItemList
 
-    fun transformData(asteroid: Asteroid) {
+    fun transformData(asteroidModel: AsteroidModel) {
         _detailItemList.value =
-            DetailMapper.transform(getApplication<Application>().baseContext, asteroid)
+            DetailMapper.transform(getApplication<Application>().baseContext, asteroidModel)
 
     }
 
