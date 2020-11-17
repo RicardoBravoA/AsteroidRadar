@@ -21,7 +21,7 @@ abstract class AsteroidDatabase : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AsteroidDatabase::class.java,
-                        "videos"
+                        "asteroid"
                     ).build()
                 }
             }
