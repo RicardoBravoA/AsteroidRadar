@@ -36,7 +36,7 @@ object AsteroidMapper {
         return asteroidEntityList
     }
 
-    private fun transformAsteroidModelToEntity(asteroidModel: AsteroidModel): AsteroidEntity {
+    fun transformAsteroidModelToEntity(asteroidModel: AsteroidModel): AsteroidEntity {
         return AsteroidEntity(
             asteroidModel.id,
             asteroidModel.codename,
