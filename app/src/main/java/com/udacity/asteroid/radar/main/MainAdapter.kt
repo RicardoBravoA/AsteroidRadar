@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
-import com.udacity.asteroid.radar.model.AsteroidModel
+import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.util.Constants
 import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
