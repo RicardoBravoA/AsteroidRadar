@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun asteroidClick(asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel) {
+    private fun asteroidClick(asteroidModel: AsteroidModel) {
         findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroidModel))
     }
 

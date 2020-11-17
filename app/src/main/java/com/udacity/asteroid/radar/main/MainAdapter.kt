@@ -14,7 +14,7 @@ import com.udacity.asteroid.radar.util.Constants
 import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
-class MainAdapter(private val asteroidClick: (asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel) -> Unit) :
+class MainAdapter(private val asteroidClick: (asteroidModel: AsteroidModel) -> Unit) :
     ListAdapter<MainItem, RecyclerView.ViewHolder>(DiffCallback) {
 
     enum class Type {
@@ -55,7 +55,7 @@ class MainAdapter(private val asteroidClick: (asteroidModel: com.udacity.asteroi
     class ItemViewHolder(private var binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel) {
+        fun bind(asteroidModel: AsteroidModel) {
             binding.titleTextView.text = asteroidModel.codename
             binding.descriptionTextView.text = asteroidModel.closeApproachDate
             binding.statusImageView.bindAsteroidStatusImage(asteroidModel.isPotentiallyHazardous)

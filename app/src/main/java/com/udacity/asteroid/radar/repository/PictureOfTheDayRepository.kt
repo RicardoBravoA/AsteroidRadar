@@ -1,5 +1,6 @@
 package com.udacity.asteroid.radar.repository
 
+/*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.udacity.asteroid.radar.data.storage.AsteroidDatabase
@@ -22,4 +23,4 @@ class PictureOfTheDayRepository(private val database: com.udacity.asteroid.radar
             database.asteroidDao.insertPicture(com.udacity.asteroid.radar.data.mapper.PictureOfTheDayMapper.transformModelToEntity(picture))
         }
     }
-}
+}*/
