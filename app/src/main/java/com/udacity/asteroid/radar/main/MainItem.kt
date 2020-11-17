@@ -1,10 +1,10 @@
 package com.udacity.asteroid.radar.main
 
-import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.model.AsteroidModel
 
 sealed class MainItem {
-    data class Item(val asteroid: Asteroid) : MainItem() {
-        override val id = asteroid.id
+    data class Item(val asteroidModel: AsteroidModel) : MainItem() {
+        override val id = asteroidModel.id
     }
 
     data class Picture(val url: String, val type: String) :
