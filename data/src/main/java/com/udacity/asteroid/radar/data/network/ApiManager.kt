@@ -13,7 +13,7 @@ object ApiManager {
 
     private var apiInterface: ApiInterface? = null
 
-    private val retrofit: Retrofit
+    val retrofit: Retrofit
         get() {
 
             val logging = HttpLoggingInterceptor()

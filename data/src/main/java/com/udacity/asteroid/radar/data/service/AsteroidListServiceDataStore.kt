@@ -2,6 +2,7 @@ package com.udacity.asteroid.radar.data.service
 
 import com.udacity.asteroid.radar.data.datastore.AsteroidDataStore
 import com.udacity.asteroid.radar.data.network.ApiManager
+import com.udacity.asteroid.radar.data.util.NetworkUtils
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.domain.model.ErrorModel
 import com.udacity.asteroid.radar.domain.util.ResultType
@@ -16,15 +17,34 @@ class AsteroidListServiceDataStore : AsteroidDataStore {
     ): ResultType<List<AsteroidModel>, ErrorModel> {
 
         withContext(Dispatchers.IO) {
-            val list = ApiManager.get().feed(startDate, endDate)
-            val asteroidList = NetworkUtils.parseStringToAsteroidList(list)
+            try {
+                val list = ApiManager.get().feed(startDate, endDate)
+                if (list.isSuccessful) {
+                    val asteroidString = list.body()
+                    val asteroidList = NetworkUtils.parseStringToAsteroidList(asteroidString!!)
 
-            asteroidList.forEach {
-                database.asteroidDao.insertAsteroid(AsteroidMapper.transformAsteroidModelToEntity(it))
+                    asteroidList.forEach {
+
+                    }
+                }
+
+                return if (list.isSuccessful) {
+                    val asteroidString = list.body()
+                    val asteroidList = NetworkUtils.parseStringToAsteroidList(asteroidString)
+
+                }
+
+            } catch (t: Throwable) {
+                return ResultType.Error
             }
+
+
+            /*asteroidList.forEach {
+                database.asteroidDao.insertAsteroid(AsteroidMapper.transformAsteroidModelToEntity(it))
+            }*/
         }
 
-        return try {
+        /*return try {
             val response = ApiManager.apiManager().listCounter().await()
 
             return if (response.isSuccessful) {
@@ -36,7 +56,7 @@ class AsteroidListServiceDataStore : AsteroidDataStore {
             }
         } catch (t: Throwable) {
             ResultType.Error(ErrorUtil.errorHandler(t))
-        }
+        }*/
     }
 
 }
