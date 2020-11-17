@@ -6,5 +6,5 @@ import com.udacity.asteroid.radar.domain.util.ResultType
 
 interface PictureOfTheDayRepository {
 
-    suspend fun picture(): ResultType<PictureOfTheDayModel, ErrorModel>
+    suspend fun get(): ResultType<PictureOfTheDayModel, ErrorModel>
 }
