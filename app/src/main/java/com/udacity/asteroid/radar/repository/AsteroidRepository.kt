@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import com.udacity.asteroid.radar.database.AsteroidDatabase
 import com.udacity.asteroid.radar.mapper.AsteroidMapper
 import com.udacity.asteroid.radar.model.AsteroidModel
-import com.udacity.asteroid.radar.network.ApiManager
+import com.udacity.asteroid.radar.data.network.ApiManager
 import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

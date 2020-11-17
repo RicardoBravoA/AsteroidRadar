@@ -5,7 +5,7 @@ import androidx.lifecycle.Transformations
 import com.udacity.asteroid.radar.database.AsteroidDatabase
 import com.udacity.asteroid.radar.mapper.PictureOfTheDayMapper
 import com.udacity.asteroid.radar.model.PictureOfTheDayModel
-import com.udacity.asteroid.radar.network.ApiManagerMoshi
+import com.udacity.asteroid.radar.data.network.ApiManagerMoshi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
