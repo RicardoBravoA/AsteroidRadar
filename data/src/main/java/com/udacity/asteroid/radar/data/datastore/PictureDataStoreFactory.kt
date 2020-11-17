@@ -2,6 +2,7 @@ package com.udacity.asteroid.radar.data.datastore
 
 import android.content.Context
 import com.udacity.asteroid.radar.data.service.PictureServiceDataStore
+import com.udacity.asteroid.radar.data.storage.PictureStorageDataStore
 import com.udacity.asteroid.radar.data.storage.database.AsteroidDatabase
 import com.udacity.asteroid.radar.data.util.isInternet
 
@@ -14,7 +15,7 @@ class PictureDataStoreFactory(private val context: Context) {
         return if (Preference.CLOUD == value) {
             PictureServiceDataStore(asteroidDatabase.asteroidDao)
         } else {
-            PictureServiceDataStore(asteroidDatabase.asteroidDao)
+            PictureStorageDataStore(asteroidDatabase.asteroidDao)
         }
     }
 

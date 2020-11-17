@@ -1,7 +1,7 @@
 package com.udacity.asteroid.radar.data.service
 
 import com.udacity.asteroid.radar.data.datastore.PictureDataStore
-import com.udacity.asteroid.radar.data.entity.PictureOfTheDayResponse
+import com.udacity.asteroid.radar.data.entity.PictureResponse
 import com.udacity.asteroid.radar.data.mapper.ErrorMapper
 import com.udacity.asteroid.radar.data.mapper.PictureMapper
 import com.udacity.asteroid.radar.data.network.ApiManagerMoshi
@@ -39,10 +39,10 @@ class PictureServiceDataStore(private val asteroidDao: AsteroidDao) :
         }
     }
 
-    private suspend fun savePicture(pictureOfTheDayResponse: PictureOfTheDayResponse) =
+    private suspend fun savePicture(pictureResponse: PictureResponse) =
         withContext(Dispatchers.IO) {
             asteroidDao.insertPicture(
-                PictureMapper.transformResponseToEntity(pictureOfTheDayResponse)
+                PictureMapper.transformResponseToEntity(pictureResponse)
             )
         }
 

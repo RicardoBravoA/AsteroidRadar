@@ -1,35 +1,46 @@
 package com.udacity.asteroid.radar.data.mapper
 
-import com.udacity.asteroid.radar.data.entity.PictureOfTheDayResponse
+import com.udacity.asteroid.radar.data.entity.PictureResponse
 import com.udacity.asteroid.radar.data.storage.entity.PictureEntity
 import com.udacity.asteroid.radar.domain.model.PictureModel
 
 object PictureMapper {
 
-    fun transformResponseToEntity(pictureOfTheDayResponse: PictureOfTheDayResponse): PictureEntity {
+    fun transformResponseToEntity(pictureResponse: PictureResponse): PictureEntity {
         return PictureEntity(
-            pictureOfTheDayResponse.copyright,
-            pictureOfTheDayResponse.date,
-            pictureOfTheDayResponse.explanation,
-            pictureOfTheDayResponse.title,
-            pictureOfTheDayResponse.url,
-            pictureOfTheDayResponse.mediaType
+            pictureResponse.copyright,
+            pictureResponse.date,
+            pictureResponse.explanation,
+            pictureResponse.title,
+            pictureResponse.url,
+            pictureResponse.mediaType
         )
     }
 
-    fun transformResponseToModel(pictureOfTheDayResponse: PictureOfTheDayResponse): PictureModel {
+    fun transformEntityToModel(pictureEntity: PictureEntity): PictureModel {
         return PictureModel(
-            pictureOfTheDayResponse.copyright,
-            pictureOfTheDayResponse.date,
-            pictureOfTheDayResponse.explanation,
-            pictureOfTheDayResponse.title,
-            pictureOfTheDayResponse.url,
-            pictureOfTheDayResponse.mediaType
+            pictureEntity.copyright,
+            pictureEntity.date,
+            pictureEntity.explanation,
+            pictureEntity.title,
+            pictureEntity.url,
+            pictureEntity.mediaType
         )
     }
 
-    fun transformModelToResponse(pictureModel: PictureModel): PictureOfTheDayResponse {
-        return PictureOfTheDayResponse(
+    fun transformResponseToModel(pictureResponse: PictureResponse): PictureModel {
+        return PictureModel(
+            pictureResponse.copyright,
+            pictureResponse.date,
+            pictureResponse.explanation,
+            pictureResponse.title,
+            pictureResponse.url,
+            pictureResponse.mediaType
+        )
+    }
+
+    fun transformModelToResponse(pictureModel: PictureModel): PictureResponse {
+        return PictureResponse(
             pictureModel.copyright,
             pictureModel.date,
             pictureModel.explanation,
