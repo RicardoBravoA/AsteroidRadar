@@ -6,18 +6,21 @@ import com.udacity.asteroid.radar.data.storage.database.AsteroidDao
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.domain.model.ErrorModel
 import com.udacity.asteroid.radar.domain.util.ResultType
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class AsteroidStorageDataStore(private val asteroidDao: AsteroidDao) : AsteroidDataStore {
 
     override suspend fun list(
         startDate: String,
         endDate: String
-    ): ResultType<List<AsteroidModel>, ErrorModel> {
-        val response = asteroidDao.getAsteroidList()
+    ): ResultType<List<AsteroidModel>, ErrorModel> = withContext(Dispatchers.IO) {
 
-        response.value?.let {
-            return ResultType.Success(AsteroidMapper.transformEntityToModel(it))
-        } ?: return ResultType.Error(ErrorModel())
+        try {
+            val response = asteroidDao.getAsteroidList()
+            return@withContext ResultType.Success(AsteroidMapper.transformEntityToModel(response))
+        } catch (t: Throwable) {
+            return@withContext ResultType.Error(ErrorModel())
+        }
     }
-
 }

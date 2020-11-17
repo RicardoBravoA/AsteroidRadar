@@ -10,7 +10,6 @@ class AsteroidDataStoreFactory(private val context: Context) {
 
     fun create(): AsteroidDataStore {
         val asteroidDatabase = AsteroidDatabase.getDatabase(context)
-
         val value = if (context.isInternet()) Preference.CLOUD else Preference.DB
 
         return if (Preference.CLOUD == value) {
@@ -18,7 +17,6 @@ class AsteroidDataStoreFactory(private val context: Context) {
         } else {
             AsteroidStorageDataStore(asteroidDatabase.asteroidDao)
         }
-
     }
 
     enum class Preference {

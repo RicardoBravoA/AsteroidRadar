@@ -1,6 +1,5 @@
 package com.udacity.asteroid.radar.data.storage.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.udacity.asteroid.radar.data.storage.entity.AsteroidEntity
 import com.udacity.asteroid.radar.data.storage.entity.PictureOfTheDayEntity
@@ -18,10 +17,10 @@ interface AsteroidDao {
     fun insertPicture(picture: PictureOfTheDayEntity)
 
     @Query("select * from asteroid")
-    fun getAsteroidList(): LiveData<List<AsteroidEntity>>
+    fun getAsteroidList(): List<AsteroidEntity>
 
     @Query("select * from picture")
-    fun getPicture(): LiveData<PictureOfTheDayEntity>
+    fun getPicture(): PictureOfTheDayEntity
 
     @Query("delete from picture")
     fun deletePicture()

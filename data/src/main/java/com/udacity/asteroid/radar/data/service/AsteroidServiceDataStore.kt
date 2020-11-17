@@ -40,15 +40,13 @@ class AsteroidServiceDataStore(private val asteroidDao: AsteroidDao) :
         }
     }
 
-    private suspend fun saveAsteroid(list: List<AsteroidResponse>) {
-        withContext(Dispatchers.IO) {
-            list.forEach {
-                asteroidDao.insertAsteroid(
-                    AsteroidMapper.transformAsteroidResponseToEntity(
-                        it
-                    )
+    private suspend fun saveAsteroid(list: List<AsteroidResponse>) = withContext(Dispatchers.IO) {
+        list.forEach {
+            asteroidDao.insertAsteroid(
+                AsteroidMapper.transformAsteroidResponseToEntity(
+                    it
                 )
-            }
+            )
         }
 
     }
