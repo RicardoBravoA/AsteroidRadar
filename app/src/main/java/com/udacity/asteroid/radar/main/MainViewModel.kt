@@ -1,10 +1,11 @@
 package com.udacity.asteroid.radar.main
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.*
+import com.udacity.asteroid.radar.database.AsteroidDatabase
+import com.udacity.asteroid.radar.repository.AsteroidRepository
+import com.udacity.asteroid.radar.repository.PictureOfTheDayRepository
 import com.udacity.asteroid.radar.util.NetworkStatus
-import com.udacity.asteroid.radar.util.NetworkUtils
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -19,24 +20,32 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
+    private val database = AsteroidDatabase.getDatabase(application.baseContext)
+    private val asteroidRepository = AsteroidRepository(database)
+    private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)
+
     init {
 //        getFeed("2020-11-16", "2020-11-23")
-        getData(application.baseContext)
+        getData("2020-11-17", "2020-11-24")
     }
 
-    private fun getData(context: Context) {
+    private fun getData(startDate: String, endDate: String) {
         viewModelScope.launch {
             _status.value = NetworkStatus.LOADING
             try {
                 delay(500)
                 coroutineScope {
-                    val items = NetworkUtils.parseStringToAsteroidList(context)
-                    val picture = NetworkUtils.parseImageOfTheDay(context)
+//                    val items = NetworkUtils.parseStringToAsteroidList(context)
+//                    val picture = NetworkUtils.parseImageOfTheDay(context)
+                    asteroidRepository.refreshAsteroids(startDate, endDate)
+                    pictureOfTheDayRepository.refreshPicture()
+                    val items = asteroidRepository.asteroidList.value
+                    val picture = pictureOfTheDayRepository.pictureOfTheDay.value
 
                     val list = mutableListOf<MainItem>()
-                    list.add(MainItem.Picture(picture.url, picture.mediaType))
+                    list.add(MainItem.Picture(picture!!.url, picture.mediaType))
 
-                    items.forEach {
+                    items!!.forEach {
                         list.add(MainItem.Item(it))
                     }
                     _asteroidList.postValue(list)
