@@ -13,7 +13,7 @@ class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             val asteroidDataRepository = AsteroidDataRepository(AsteroidDataStoreFactory(app))
             val asteroidUseCase = AsteroidUseCase(asteroidDataRepository)
-            return MainViewModel(app) as T
+            return MainViewModel(asteroidUseCase) as T
         }
         throw IllegalArgumentException("Unable to construct viewmodel")
     }

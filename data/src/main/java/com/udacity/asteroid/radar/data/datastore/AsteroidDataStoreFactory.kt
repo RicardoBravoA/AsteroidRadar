@@ -14,9 +14,9 @@ class AsteroidDataStoreFactory(private val context: Context) {
         val value = if (context.isInternet()) Preference.CLOUD else Preference.DB
 
         return if (Preference.CLOUD == value) {
-            AsteroidServiceDataStore(asteroidDatabase)
+            AsteroidServiceDataStore(asteroidDatabase.asteroidDao)
         } else {
-            AsteroidStorageDataStore(asteroidDatabase)
+            AsteroidStorageDataStore(asteroidDatabase.asteroidDao)
         }
 
     }

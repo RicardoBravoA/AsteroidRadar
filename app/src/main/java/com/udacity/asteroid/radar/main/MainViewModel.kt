@@ -1,16 +1,15 @@
 package com.udacity.asteroid.radar.main
 
-import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
-import com.udacity.asteroid.radar.data.storage.AsteroidDatabase
-import com.udacity.asteroid.radar.repository.AsteroidRepository
-import com.udacity.asteroid.radar.repository.PictureOfTheDayRepository
+import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
+import com.udacity.asteroid.radar.domain.util.ResultType
 import com.udacity.asteroid.radar.util.NetworkStatus
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(private val asteroidUseCase: AsteroidUseCase) : ViewModel() {
 
     private val _status = MutableLiveData<NetworkStatus>()
     val status: LiveData<NetworkStatus>
@@ -20,9 +19,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
-    private val database = com.udacity.asteroid.radar.data.storage.AsteroidDatabase.getDatabase(application.baseContext)
+    /*private val database =
+        com.udacity.asteroid.radar.data.storage.AsteroidDatabase.getDatabase(application.baseContext)
     private val asteroidRepository = AsteroidRepository(database)
-    private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)
+    private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)*/
 
     init {
 //        getFeed("2020-11-16", "2020-11-23")
@@ -32,13 +32,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private fun getData(startDate: String, endDate: String) {
         viewModelScope.launch {
             _status.value = NetworkStatus.LOADING
-            try {
+            delay(500)
+
+            coroutineScope {
+                when (val result = asteroidUseCase.list(startDate, endDate)) {
+                    is ResultType.Success -> {
+                        Log.i("z- result", result.value.toString())
+                        val items = result.value
+                        val list = mutableListOf<MainItem>()
+                        items.forEach {
+                            list.add(MainItem.Item(it))
+                        }
+                        _asteroidList.postValue(list)
+                        _status.value = NetworkStatus.DONE
+                    }
+                    is ResultType.Error -> {
+                        Log.i("z- result", "error")
+                        _asteroidList.value = arrayListOf()
+                        _status.value = NetworkStatus.ERROR
+                    }
+                }
+            }
+
+
+            /*try {
                 delay(500)
                 coroutineScope {
 //                    val items = NetworkUtils.parseStringToAsteroidList(context)
 //                    val picture = NetworkUtils.parseImageOfTheDay(context)
-                    asteroidRepository.refreshAsteroids(startDate, endDate)
-                    pictureOfTheDayRepository.refreshPicture()
+//                    asteroidRepository.refreshAsteroids(startDate, endDate)
+//                    pictureOfTheDayRepository.refreshPicture()
                     val items = asteroidRepository.asteroidList.value
                     val picture = pictureOfTheDayRepository.pictureOfTheDay.value
 
@@ -54,8 +77,36 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             } catch (e: java.lang.Exception) {
                 _asteroidList.value = arrayListOf()
                 _status.value = NetworkStatus.ERROR
-            }
+            }*/
         }
+
+        /*private fun getData(startDate: String, endDate: String) {
+            viewModelScope.launch {
+                _status.value = NetworkStatus.LOADING
+                try {
+                    delay(500)
+                    coroutineScope {
+    //                    val items = NetworkUtils.parseStringToAsteroidList(context)
+    //                    val picture = NetworkUtils.parseImageOfTheDay(context)
+                        asteroidRepository.refreshAsteroids(startDate, endDate)
+                        pictureOfTheDayRepository.refreshPicture()
+                        val items = asteroidRepository.asteroidList.value
+                        val picture = pictureOfTheDayRepository.pictureOfTheDay.value
+
+                        val list = mutableListOf<MainItem>()
+                        list.add(MainItem.Picture(picture!!.url, picture.mediaType))
+
+                        items!!.forEach {
+                            list.add(MainItem.Item(it))
+                        }
+                        _asteroidList.postValue(list)
+                        _status.value = NetworkStatus.DONE
+                    }
+                } catch (e: java.lang.Exception) {
+                    _asteroidList.value = arrayListOf()
+                    _status.value = NetworkStatus.ERROR
+                }
+            }*/
     }
 
     /*private fun getFeed(startDate: String, endDate: String, context: Context) {

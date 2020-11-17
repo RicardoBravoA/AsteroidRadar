@@ -17,12 +17,13 @@ abstract class AsteroidDatabase : RoomDatabase() {
 
         fun getDatabase(context: Context): AsteroidDatabase {
             synchronized(AsteroidDatabase::class.java) {
-                if (!Companion::INSTANCE.isInitialized) {
+                if (!::INSTANCE.isInitialized) {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AsteroidDatabase::class.java,
-                        "asteroid"
-                    ).build()
+                        "asteroid-database"
+                    ).fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return INSTANCE
