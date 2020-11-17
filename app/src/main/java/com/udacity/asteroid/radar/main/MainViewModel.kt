@@ -22,10 +22,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
-    private val _imageOfTheDay = MutableLiveData<PictureOfTheDay>()
-    val pictureOfTheDay: LiveData<PictureOfTheDay>
-        get() = _imageOfTheDay
-
     init {
 //        getFeed("2020-11-16", "2020-11-23")
         getData(application.baseContext)
@@ -41,7 +37,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                     val picture = NetworkUtils.parseImageOfTheDay(context)
 
                     val list = mutableListOf<MainItem>()
-                    list.add(MainItem.Picture(picture.url))
+                    list.add(MainItem.Picture(picture.url, picture.mediaType))
 
                     items.forEach {
                         list.add(MainItem.Item(it))

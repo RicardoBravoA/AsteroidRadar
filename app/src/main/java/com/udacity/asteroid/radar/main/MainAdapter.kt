@@ -2,12 +2,15 @@ package com.udacity.asteroid.radar.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.util.Constants
 import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
@@ -72,7 +75,13 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(picture: MainItem.Picture) {
-            binding.imageOfTheDay.bindImage(picture.url)
+            if (Constants.PICTURE_TYPE == picture.type) {
+                binding.imageOfTheDay.bindImage(picture.url)
+            } else {
+                binding.imageOfTheDay.scaleType = ImageView.ScaleType.CENTER_INSIDE
+                binding.imageOfTheDay.setImageResource(R.drawable.ic_no_photo)
+            }
+
         }
 
         companion object {
