@@ -1,11 +1,10 @@
-package com.udacity.asteroid.radar.model
+package com.udacity.asteroid.radar.domain.model
 
 import android.os.Parcelable
-import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PictureOfTheDayModel(
     val copyright: String, val date: String, val explanation: String,
-    val title: String, val url: String, @Json(name = "media_type") val mediaType: String
+    val title: String, val url: String, val mediaType: String
 ) : Parcelable

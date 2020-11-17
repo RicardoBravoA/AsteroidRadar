@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.FragmentMainBinding
-import com.udacity.asteroid.radar.model.AsteroidModel
+import com.udacity.asteroid.radar.domain.model.AsteroidModel
 
 class MainFragment : Fragment() {
 
@@ -42,7 +42,7 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    private fun asteroidClick(asteroidModel: AsteroidModel) {
+    private fun asteroidClick(asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel) {
         findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroidModel))
     }
 

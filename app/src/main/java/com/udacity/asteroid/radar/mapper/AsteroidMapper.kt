@@ -1,12 +1,12 @@
 package com.udacity.asteroid.radar.mapper
 
 import com.udacity.asteroid.radar.data.storage.entity.AsteroidEntity
-import com.udacity.asteroid.radar.model.AsteroidModel
+import com.udacity.asteroid.radar.domain.model.AsteroidModel
 
 object AsteroidMapper {
 
-    fun transformEntityToModel(asteroidEntityList: List<AsteroidEntity>): List<AsteroidModel> {
-        val asteroidModelList = mutableListOf<AsteroidModel>()
+    fun transformEntityToModel(asteroidEntityList: List<AsteroidEntity>): List<com.udacity.asteroid.radar.domain.model.AsteroidModel> {
+        val asteroidModelList = mutableListOf<com.udacity.asteroid.radar.domain.model.AsteroidModel>()
 
         asteroidEntityList.forEach {
             asteroidModelList.add(transformAsteroidEntityToModel(it))
@@ -14,8 +14,8 @@ object AsteroidMapper {
         return asteroidModelList
     }
 
-    private fun transformAsteroidEntityToModel(asteroidEntity: AsteroidEntity): AsteroidModel {
-        return AsteroidModel(
+    private fun transformAsteroidEntityToModel(asteroidEntity: AsteroidEntity): com.udacity.asteroid.radar.domain.model.AsteroidModel {
+        return com.udacity.asteroid.radar.domain.model.AsteroidModel(
             asteroidEntity.id,
             asteroidEntity.codename,
             asteroidEntity.closeApproachDate,
@@ -27,7 +27,7 @@ object AsteroidMapper {
         )
     }
 
-    fun transformModelToEntity(asteroidModelList: List<AsteroidModel>): List<AsteroidEntity> {
+    fun transformModelToEntity(asteroidModelList: List<com.udacity.asteroid.radar.domain.model.AsteroidModel>): List<AsteroidEntity> {
         val asteroidEntityList = mutableListOf<AsteroidEntity>()
 
         asteroidModelList.forEach {
@@ -36,7 +36,7 @@ object AsteroidMapper {
         return asteroidEntityList
     }
 
-    fun transformAsteroidModelToEntity(asteroidModel: AsteroidModel): AsteroidEntity {
+    fun transformAsteroidModelToEntity(asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel): AsteroidEntity {
         return AsteroidEntity(
             asteroidModel.id,
             asteroidModel.codename,

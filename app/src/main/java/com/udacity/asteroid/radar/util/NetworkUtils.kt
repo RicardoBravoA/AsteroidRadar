@@ -1,8 +1,8 @@
 package com.udacity.asteroid.radar.util
 
 import android.content.Context
-import com.udacity.asteroid.radar.model.AsteroidModel
-import com.udacity.asteroid.radar.model.PictureOfTheDayModel
+import com.udacity.asteroid.radar.domain.model.AsteroidModel
+import com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -10,9 +10,10 @@ import kotlin.collections.ArrayList
 
 object NetworkUtils {
 
-    fun parseImageOfTheDay(context: Context): PictureOfTheDayModel {
+    fun parseImageOfTheDay(context: Context): com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel {
         val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
-        var imageOfTheDay = PictureOfTheDayModel("", "", "", "", "", "")
+        var imageOfTheDay =
+            com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel("", "", "", "", "", "")
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -23,14 +24,21 @@ object NetworkUtils {
             val url = jsonObject.getString("url")
             val mediaType = jsonObject.getString("media_type")
 
-            imageOfTheDay = PictureOfTheDayModel(copyright, date, explanation, title, url, mediaType)
+            imageOfTheDay = com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel(
+                copyright,
+                date,
+                explanation,
+                title,
+                url,
+                mediaType
+            )
         }
         return imageOfTheDay
     }
 
-    fun parseStringToAsteroidList(context: Context): List<AsteroidModel> {
+    fun parseStringToAsteroidList(context: Context): List<com.udacity.asteroid.radar.domain.model.AsteroidModel> {
         val response = JsonUtils.loadJSONFromAsset(context, "asteroids.json")
-        val asteroidList = mutableListOf<AsteroidModel>()
+        val asteroidList = mutableListOf<com.udacity.asteroid.radar.domain.model.AsteroidModel>()
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -57,7 +65,7 @@ object NetworkUtils {
                     val isPotentiallyHazardous = asteroidJson
                         .getBoolean("is_potentially_hazardous_asteroid")
 
-                    val asteroid = AsteroidModel(
+                    val asteroid = com.udacity.asteroid.radar.domain.model.AsteroidModel(
                         id,
                         codename,
                         formattedDate,
@@ -75,8 +83,8 @@ object NetworkUtils {
         return asteroidList
     }
 
-    fun parseStringToAsteroidList(response: String): List<AsteroidModel> {
-        val asteroidList = mutableListOf<AsteroidModel>()
+    fun parseStringToAsteroidList(response: String): List<com.udacity.asteroid.radar.domain.model.AsteroidModel> {
+        val asteroidList = mutableListOf<com.udacity.asteroid.radar.domain.model.AsteroidModel>()
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -103,7 +111,7 @@ object NetworkUtils {
                     val isPotentiallyHazardous = asteroidJson
                         .getBoolean("is_potentially_hazardous_asteroid")
 
-                    val asteroid = AsteroidModel(
+                    val asteroid = com.udacity.asteroid.radar.domain.model.AsteroidModel(
                         id,
                         codename,
                         formattedDate,
@@ -121,10 +129,10 @@ object NetworkUtils {
         return asteroidList
     }
 
-    fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<AsteroidModel> {
+    fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<com.udacity.asteroid.radar.domain.model.AsteroidModel> {
         val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
-        val asteroidList = ArrayList<AsteroidModel>()
+        val asteroidList = ArrayList<com.udacity.asteroid.radar.domain.model.AsteroidModel>()
 
         val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
         for (formattedDate in nextSevenDaysFormattedDates) {
@@ -147,7 +155,7 @@ object NetworkUtils {
                 val isPotentiallyHazardous = asteroidJson
                     .getBoolean("is_potentially_hazardous_asteroid")
 
-                val asteroid = AsteroidModel(
+                val asteroid = com.udacity.asteroid.radar.domain.model.AsteroidModel(
                     id, codename, formattedDate, absoluteMagnitude,
                     estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous
                 )
