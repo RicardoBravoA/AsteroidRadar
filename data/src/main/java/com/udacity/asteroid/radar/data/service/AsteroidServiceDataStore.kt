@@ -13,10 +13,10 @@ import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.domain.model.ErrorModel
 import com.udacity.asteroid.radar.domain.util.ResultType
 
-class AsteroidListServiceDataStore(private val asteroidDatabase: AsteroidDatabase) :
+class AsteroidServiceDataStore(private val asteroidDatabase: AsteroidDatabase) :
     AsteroidDataStore {
 
-    override suspend fun asteroidList(
+    override suspend fun list(
         startDate: String,
         endDate: String
     ): ResultType<List<AsteroidModel>, ErrorModel> {

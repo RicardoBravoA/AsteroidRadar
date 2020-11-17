@@ -9,7 +9,7 @@ import com.udacity.asteroid.radar.domain.util.ResultType
 
 class AsteroidStorageDataStore(private val asteroidDatabase: AsteroidDatabase) : AsteroidDataStore {
 
-    override suspend fun asteroidList(
+    override suspend fun list(
         startDate: String,
         endDate: String
     ): ResultType<List<AsteroidModel>, ErrorModel> {

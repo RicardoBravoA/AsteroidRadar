@@ -6,7 +6,7 @@ import com.udacity.asteroid.radar.domain.util.ResultType
 
 interface AsteroidDataStore {
 
-    suspend fun asteroidList(
+    suspend fun list(
         startDate: String,
         endDate: String
     ): ResultType<List<AsteroidModel>, ErrorModel>
