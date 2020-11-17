@@ -10,19 +10,23 @@ import com.udacity.asteroid.radar.database.entity.PictureOfTheDayEntity
 @Database(entities = [AsteroidEntity::class, PictureOfTheDayEntity::class], version = 1)
 abstract class AsteroidDatabase : RoomDatabase() {
     abstract val asteroidDao: AsteroidDao
-}
 
-private lateinit var INSTANCE: AsteroidDatabase
+    companion object {
+        @Volatile
+        private lateinit var INSTANCE: AsteroidDatabase
 
-fun getDatabase(context: Context): AsteroidDatabase {
-    synchronized(AsteroidDatabase::class.java) {
-        if (!::INSTANCE.isInitialized) {
-            INSTANCE = Room.databaseBuilder(
-                context.applicationContext,
-                AsteroidDatabase::class.java,
-                "videos"
-            ).build()
+        fun getDatabase(context: Context): AsteroidDatabase {
+            synchronized(AsteroidDatabase::class.java) {
+                if (!::INSTANCE.isInitialized) {
+                    INSTANCE = Room.databaseBuilder(
+                        context.applicationContext,
+                        AsteroidDatabase::class.java,
+                        "videos"
+                    ).build()
+                }
+            }
+            return INSTANCE
         }
     }
-    return INSTANCE
+
 }
