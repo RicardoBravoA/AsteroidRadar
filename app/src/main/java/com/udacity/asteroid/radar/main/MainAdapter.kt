@@ -9,12 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
-import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.model.AsteroidModel
 import com.udacity.asteroid.radar.util.Constants
 import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
-class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
+class MainAdapter(private val asteroidClick: (asteroidModel: AsteroidModel) -> Unit) :
     ListAdapter<MainItem, RecyclerView.ViewHolder>(DiffCallback) {
 
     enum class Type {
@@ -38,9 +38,9 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
             is ItemViewHolder -> {
                 val item = getItem(position) as MainItem.Item
                 holder.itemView.setOnClickListener {
-                    asteroidClick(item.asteroid)
+                    asteroidClick(item.asteroidModel)
                 }
-                holder.bind(item.asteroid)
+                holder.bind(item.asteroidModel)
             }
         }
     }
@@ -55,10 +55,10 @@ class MainAdapter(private val asteroidClick: (asteroid: Asteroid) -> Unit) :
     class ItemViewHolder(private var binding: ItemMainBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(asteroid: Asteroid) {
-            binding.titleTextView.text = asteroid.codename
-            binding.descriptionTextView.text = asteroid.closeApproachDate
-            binding.statusImageView.bindAsteroidStatusImage(asteroid.isPotentiallyHazardous)
+        fun bind(asteroidModel: AsteroidModel) {
+            binding.titleTextView.text = asteroidModel.codename
+            binding.descriptionTextView.text = asteroidModel.closeApproachDate
+            binding.statusImageView.bindAsteroidStatusImage(asteroidModel.isPotentiallyHazardous)
         }
 
         companion object {

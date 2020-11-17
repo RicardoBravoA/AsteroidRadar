@@ -3,16 +3,16 @@ package com.udacity.asteroid.radar.mapper
 import android.content.Context
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.detail.DetailModel
-import com.udacity.asteroid.radar.model.Asteroid
+import com.udacity.asteroid.radar.model.AsteroidModel
 import com.udacity.asteroid.radar.model.DetailItem
 
 object DetailMapper {
 
-    fun transform(context: Context, asteroid: Asteroid): List<DetailModel> {
+    fun transform(context: Context, asteroidModel: AsteroidModel): List<DetailModel> {
         val list = mutableListOf<DetailModel>()
-        list.add(DetailModel.Picture(asteroid.isPotentiallyHazardous))
+        list.add(DetailModel.Picture(asteroidModel.isPotentiallyHazardous))
 
-        val detailList = transformItem(context, asteroid)
+        val detailList = transformItem(context, asteroidModel)
 
         detailList.forEach {
             list.add(DetailModel.Item(it))
@@ -21,13 +21,13 @@ object DetailMapper {
         return list
     }
 
-    private fun transformItem(context: Context, asteroid: Asteroid): List<DetailItem> {
+    private fun transformItem(context: Context, asteroidModel: AsteroidModel): List<DetailItem> {
         val detailList = mutableListOf<DetailItem>()
 
         val closeApproach =
             DetailItem(
                 context.getString(R.string.close_approach_data_title),
-                asteroid.closeApproachDate
+                asteroidModel.closeApproachDate
             )
 
         val absoluteMagnitude =
@@ -35,7 +35,7 @@ object DetailMapper {
                 context.getString(R.string.absolute_magnitude_title),
                 String.format(
                     context.getString(R.string.astronomical_unit_format),
-                    asteroid.absoluteMagnitude
+                    asteroidModel.absoluteMagnitude
                 ), true
             )
 
@@ -44,7 +44,7 @@ object DetailMapper {
                 context.getString(R.string.estimated_diameter_title),
                 String.format(
                     context.getString(R.string.km_unit_format),
-                    asteroid.estimatedDiameter
+                    asteroidModel.estimatedDiameter
                 )
             )
 
@@ -53,7 +53,7 @@ object DetailMapper {
                 context.getString(R.string.relative_velocity_title),
                 String.format(
                     context.getString(R.string.km_s_unit_format),
-                    asteroid.relativeVelocity
+                    asteroidModel.relativeVelocity
                 )
             )
 
@@ -62,7 +62,7 @@ object DetailMapper {
                 context.getString(R.string.distance_from_earth_title),
                 String.format(
                     context.getString(R.string.astronomical_unit_format),
-                    asteroid.distanceFromEarth
+                    asteroidModel.distanceFromEarth
                 )
             )
 

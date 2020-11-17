@@ -1,8 +1,8 @@
 package com.udacity.asteroid.radar.util
 
 import android.content.Context
-import com.udacity.asteroid.radar.model.Asteroid
-import com.udacity.asteroid.radar.model.PictureOfTheDay
+import com.udacity.asteroid.radar.model.AsteroidModel
+import com.udacity.asteroid.radar.model.PictureOfTheDayModel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
@@ -10,9 +10,9 @@ import kotlin.collections.ArrayList
 
 object NetworkUtils {
 
-    fun parseImageOfTheDay(context: Context): PictureOfTheDay {
+    fun parseImageOfTheDay(context: Context): PictureOfTheDayModel {
         val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
-        var imageOfTheDay = PictureOfTheDay("", "", "", "", "", "")
+        var imageOfTheDay = PictureOfTheDayModel("", "", "", "", "", "")
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -23,14 +23,14 @@ object NetworkUtils {
             val url = jsonObject.getString("url")
             val mediaType = jsonObject.getString("media_type")
 
-            imageOfTheDay = PictureOfTheDay(copyright, date, explanation, title, url, mediaType)
+            imageOfTheDay = PictureOfTheDayModel(copyright, date, explanation, title, url, mediaType)
         }
         return imageOfTheDay
     }
 
-    fun parseStringToAsteroidList(context: Context): List<Asteroid> {
+    fun parseStringToAsteroidList(context: Context): List<AsteroidModel> {
         val response = JsonUtils.loadJSONFromAsset(context, "asteroids.json")
-        val asteroidList = mutableListOf<Asteroid>()
+        val asteroidList = mutableListOf<AsteroidModel>()
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -57,7 +57,7 @@ object NetworkUtils {
                     val isPotentiallyHazardous = asteroidJson
                         .getBoolean("is_potentially_hazardous_asteroid")
 
-                    val asteroid = Asteroid(
+                    val asteroid = AsteroidModel(
                         id,
                         codename,
                         formattedDate,
@@ -75,8 +75,8 @@ object NetworkUtils {
         return asteroidList
     }
 
-    fun parseStringToAsteroidList(response: String): List<Asteroid> {
-        val asteroidList = mutableListOf<Asteroid>()
+    fun parseStringToAsteroidList(response: String): List<AsteroidModel> {
+        val asteroidList = mutableListOf<AsteroidModel>()
 
         response?.let {
             val jsonObject = JSONObject(response)
@@ -103,7 +103,7 @@ object NetworkUtils {
                     val isPotentiallyHazardous = asteroidJson
                         .getBoolean("is_potentially_hazardous_asteroid")
 
-                    val asteroid = Asteroid(
+                    val asteroid = AsteroidModel(
                         id,
                         codename,
                         formattedDate,
@@ -121,10 +121,10 @@ object NetworkUtils {
         return asteroidList
     }
 
-    fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+    fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<AsteroidModel> {
         val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
-        val asteroidList = ArrayList<Asteroid>()
+        val asteroidList = ArrayList<AsteroidModel>()
 
         val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
         for (formattedDate in nextSevenDaysFormattedDates) {
@@ -147,7 +147,7 @@ object NetworkUtils {
                 val isPotentiallyHazardous = asteroidJson
                     .getBoolean("is_potentially_hazardous_asteroid")
 
-                val asteroid = Asteroid(
+                val asteroid = AsteroidModel(
                     id, codename, formattedDate, absoluteMagnitude,
                     estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous
                 )
