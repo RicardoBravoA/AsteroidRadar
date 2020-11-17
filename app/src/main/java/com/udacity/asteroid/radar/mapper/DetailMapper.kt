@@ -3,8 +3,8 @@ package com.udacity.asteroid.radar.mapper
 import android.content.Context
 import com.udacity.asteroid.radar.R
 import com.udacity.asteroid.radar.detail.DetailModel
-import com.udacity.asteroid.radar.model.AsteroidModel
-import com.udacity.asteroid.radar.model.DetailItem
+import com.udacity.asteroid.radar.domain.model.AsteroidModel
+import com.udacity.asteroid.radar.domain.model.DetailItem
 
 object DetailMapper {
 
