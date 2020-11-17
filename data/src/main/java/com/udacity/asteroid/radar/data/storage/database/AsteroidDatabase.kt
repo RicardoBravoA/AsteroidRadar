@@ -1,4 +1,4 @@
-package com.udacity.asteroid.radar.data.storage
+package com.udacity.asteroid.radar.data.storage.database
 
 import android.content.Context
 import androidx.room.Database
@@ -9,7 +9,7 @@ import com.udacity.asteroid.radar.data.storage.entity.PictureOfTheDayEntity
 
 @Database(entities = [AsteroidEntity::class, PictureOfTheDayEntity::class], version = 1)
 abstract class AsteroidDatabase : RoomDatabase() {
-    abstract val asteroidDao: com.udacity.asteroid.radar.data.storage.AsteroidDao
+    abstract val asteroidDao: AsteroidDao
 
     companion object {
         @Volatile
