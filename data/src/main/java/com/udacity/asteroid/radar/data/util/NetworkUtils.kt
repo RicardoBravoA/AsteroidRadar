@@ -1,8 +1,6 @@
-package com.udacity.asteroid.radar.util
+package com.udacity.asteroid.radar.data.util
 
 import android.content.Context
-import com.udacity.asteroid.radar.domain.model.AsteroidModel
-import com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*

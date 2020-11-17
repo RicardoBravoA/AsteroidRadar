@@ -1,4 +1,4 @@
-package com.udacity.asteroid.radar.util
+package com.udacity.asteroid.radar.data.util
 
 import android.content.Context
 import java.io.IOException
