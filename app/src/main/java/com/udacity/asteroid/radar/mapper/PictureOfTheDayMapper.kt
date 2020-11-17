@@ -1,6 +1,6 @@
 package com.udacity.asteroid.radar.mapper
 
-import com.udacity.asteroid.radar.database.entity.PictureOfTheDayEntity
+import com.udacity.asteroid.radar.data.storage.entity.PictureOfTheDayEntity
 import com.udacity.asteroid.radar.model.PictureOfTheDayModel
 
 object PictureOfTheDayMapper {

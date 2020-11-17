@@ -2,7 +2,7 @@ package com.udacity.asteroid.radar.main
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.udacity.asteroid.radar.database.AsteroidDatabase
+import com.udacity.asteroid.radar.data.storage.AsteroidDatabase
 import com.udacity.asteroid.radar.repository.AsteroidRepository
 import com.udacity.asteroid.radar.repository.PictureOfTheDayRepository
 import com.udacity.asteroid.radar.util.NetworkStatus
@@ -20,7 +20,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val asteroidList: LiveData<List<MainItem>>
         get() = _asteroidList
 
-    private val database = AsteroidDatabase.getDatabase(application.baseContext)
+    private val database = com.udacity.asteroid.radar.data.storage.AsteroidDatabase.getDatabase(application.baseContext)
     private val asteroidRepository = AsteroidRepository(database)
     private val pictureOfTheDayRepository = PictureOfTheDayRepository(database)
 

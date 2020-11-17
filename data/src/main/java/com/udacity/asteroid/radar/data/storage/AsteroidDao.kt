@@ -1,9 +1,9 @@
-package com.udacity.asteroid.radar.database
+package com.udacity.asteroid.radar.data.storage
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.udacity.asteroid.radar.database.entity.AsteroidEntity
-import com.udacity.asteroid.radar.database.entity.PictureOfTheDayEntity
+import com.udacity.asteroid.radar.data.storage.entity.AsteroidEntity
+import com.udacity.asteroid.radar.data.storage.entity.PictureOfTheDayEntity
 
 @Dao
 interface AsteroidDao {

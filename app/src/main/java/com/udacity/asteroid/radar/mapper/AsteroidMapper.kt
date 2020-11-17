@@ -1,6 +1,6 @@
 package com.udacity.asteroid.radar.mapper
 
-import com.udacity.asteroid.radar.database.entity.AsteroidEntity
+import com.udacity.asteroid.radar.data.storage.entity.AsteroidEntity
 import com.udacity.asteroid.radar.model.AsteroidModel
 
 object AsteroidMapper {
