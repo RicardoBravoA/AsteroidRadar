@@ -7,7 +7,7 @@ sealed class MainItem {
         override val id = asteroid.id
     }
 
-    data class Picture(val url: String) :
+    data class Picture(val url: String, val type: String) :
         MainItem() {
         override val id = Long.MIN_VALUE
     }
