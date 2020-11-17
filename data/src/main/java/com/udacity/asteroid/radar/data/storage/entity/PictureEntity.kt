@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "picture")
-data class PictureOfTheDayEntity(
+data class PictureEntity(
     @PrimaryKey
     val copyright: String,
     val date: String,

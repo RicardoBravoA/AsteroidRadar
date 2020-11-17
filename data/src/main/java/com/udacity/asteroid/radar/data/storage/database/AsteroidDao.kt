@@ -2,7 +2,7 @@ package com.udacity.asteroid.radar.data.storage.database
 
 import androidx.room.*
 import com.udacity.asteroid.radar.data.storage.entity.AsteroidEntity
-import com.udacity.asteroid.radar.data.storage.entity.PictureOfTheDayEntity
+import com.udacity.asteroid.radar.data.storage.entity.PictureEntity
 
 @Dao
 interface AsteroidDao {
@@ -14,13 +14,13 @@ interface AsteroidDao {
     fun insertAsteroid(asteroid: AsteroidEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPicture(picture: PictureOfTheDayEntity)
+    fun insertPicture(picture: PictureEntity)
 
     @Query("select * from asteroid")
     fun getAsteroidList(): List<AsteroidEntity>
 
     @Query("select * from picture")
-    fun getPicture(): PictureOfTheDayEntity
+    fun getPicture(): PictureEntity
 
     @Query("delete from picture")
     fun deletePicture()

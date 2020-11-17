@@ -3,13 +3,17 @@ package com.udacity.asteroid.radar.main
 import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
+import com.udacity.asteroid.radar.domain.usecase.PictureUseCase
 import com.udacity.asteroid.radar.domain.util.ResultType
 import com.udacity.asteroid.radar.util.NetworkStatus
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val asteroidUseCase: AsteroidUseCase) : ViewModel() {
+class MainViewModel(
+    private val asteroidUseCase: AsteroidUseCase,
+    private val pictureUseCase: PictureUseCase
+) : ViewModel() {
 
     private val _status = MutableLiveData<NetworkStatus>()
     val status: LiveData<NetworkStatus>
@@ -33,6 +37,24 @@ class MainViewModel(private val asteroidUseCase: AsteroidUseCase) : ViewModel() 
             delay(500)
 
             coroutineScope {
+                when (val result = asteroidUseCase.list(startDate, endDate)) {
+                    is ResultType.Success -> {
+                        Log.i("z- result", result.value.toString())
+                        val items = result.value
+                        val list = mutableListOf<MainItem>()
+                        items.forEach {
+                            list.add(MainItem.Item(it))
+                        }
+                        _asteroidList.postValue(list)
+                        _status.value = NetworkStatus.DONE
+                    }
+                    is ResultType.Error -> {
+                        Log.i("z- result", "error")
+                        _asteroidList.value = arrayListOf()
+                        _status.value = NetworkStatus.ERROR
+                    }
+                }
+
                 when (val result = asteroidUseCase.list(startDate, endDate)) {
                     is ResultType.Success -> {
                         Log.i("z- result", result.value.toString())

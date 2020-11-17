@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class PictureOfTheDayModel(
+data class PictureModel(
     val copyright: String, val date: String, val explanation: String,
     val title: String, val url: String, val mediaType: String
 ) : Parcelable
