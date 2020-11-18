@@ -17,13 +17,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/image_of_the_day_text_view"
             style="@style/ImageOfTheDayTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
+            android:focusable="true"
+            android:singleLine="true"
             android:text="@string/image_of_the_day"
+            app:autoSizeTextType="uniform"
             app:layout_constraintBottom_toBottomOf="@+id/image_of_the_day"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

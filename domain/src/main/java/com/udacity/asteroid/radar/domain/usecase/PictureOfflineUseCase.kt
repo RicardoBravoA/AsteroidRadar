@@ -11,4 +11,8 @@ class PictureOfflineUseCase(private val pictureRepository: PictureOfflineReposit
         return pictureRepository.get()
     }
 
+    suspend fun delete() {
+        pictureRepository.delete()
+    }
+
 }

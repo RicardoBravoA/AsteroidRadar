@@ -13,4 +13,8 @@ class AsteroidOfflineUseCase(private val asteroidRepository: AsteroidOfflineRepo
     ): ResultType<List<AsteroidModel>, ErrorModel> {
         return asteroidRepository.list(startDate, endDate)
     }
+
+    suspend fun delete(currentDate: String) {
+        asteroidRepository.delete(currentDate)
+    }
 }

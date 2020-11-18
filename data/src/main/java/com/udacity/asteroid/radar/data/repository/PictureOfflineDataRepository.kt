@@ -16,4 +16,9 @@ class PictureOfflineDataRepository(private val context: Context) :
         return PictureStorageDataStore(asteroidDatabase.asteroidDao).get()
     }
 
+    override suspend fun delete() {
+        val asteroidDatabase = AsteroidDatabase.getDatabase(context)
+        return PictureStorageDataStore(asteroidDatabase.asteroidDao).delete()
+    }
+
 }

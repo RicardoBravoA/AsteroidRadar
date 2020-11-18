@@ -1,6 +1,6 @@
 package com.udacity.asteroid.radar.data.storage
 
-import com.udacity.asteroid.radar.data.datastore.AsteroidDataStore
+import com.udacity.asteroid.radar.data.datastore.AsteroidOfflineDataStore
 import com.udacity.asteroid.radar.data.mapper.AsteroidMapper
 import com.udacity.asteroid.radar.data.storage.database.AsteroidDao
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
@@ -9,7 +9,7 @@ import com.udacity.asteroid.radar.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class AsteroidStorageDataStore(private val asteroidDao: AsteroidDao) : AsteroidDataStore {
+class AsteroidStorageDataStore(private val asteroidDao: AsteroidDao) : AsteroidOfflineDataStore {
 
     override suspend fun list(
         startDate: String,
@@ -23,4 +23,10 @@ class AsteroidStorageDataStore(private val asteroidDao: AsteroidDao) : AsteroidD
             return@withContext ResultType.Error(ErrorModel())
         }
     }
+
+    override suspend fun delete(currentDate: String) = withContext(Dispatchers.IO) {
+        asteroidDao.deleteOldAsteroids(currentDate)
+
+    }
+
 }

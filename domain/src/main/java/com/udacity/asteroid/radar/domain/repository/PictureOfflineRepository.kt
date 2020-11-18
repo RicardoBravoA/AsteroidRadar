@@ -8,4 +8,6 @@ interface PictureOfflineRepository {
 
     suspend fun get(): ResultType<PictureModel, ErrorModel>
 
+    suspend fun delete()
+
 }
