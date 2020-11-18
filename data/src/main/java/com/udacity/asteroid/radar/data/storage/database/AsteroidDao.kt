@@ -8,9 +8,6 @@ import com.udacity.asteroid.radar.data.storage.entity.PictureEntity
 interface AsteroidDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroids: AsteroidEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAsteroid(asteroid: AsteroidEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
