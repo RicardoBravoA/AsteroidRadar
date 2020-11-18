@@ -77,6 +77,7 @@ class MainAdapter(private val asteroidClick: (asteroidModel: AsteroidModel) -> U
         fun bind(picture: MainItem.Picture) {
             picture.title?.let {
                 binding.imageOfTheDayTextView.text = it
+                binding.imageOfTheDayTextView.contentDescription = it
             }
 
             if (Constants.PICTURE_TYPE == picture.type) {
