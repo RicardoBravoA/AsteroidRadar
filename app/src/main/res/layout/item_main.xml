@@ -35,6 +35,7 @@
             android:layout_width="@dimen/item_image_size"
             android:layout_height="@dimen/item_image_size"
             android:contentDescription="@string/potentially_hazardous_asteroid_image"
+            android:focusable="true"
             android:padding="@dimen/dimen_16_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

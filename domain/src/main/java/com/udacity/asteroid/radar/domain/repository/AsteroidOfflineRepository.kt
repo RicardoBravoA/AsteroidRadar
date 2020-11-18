@@ -10,4 +10,7 @@ interface AsteroidOfflineRepository {
         startDate: String,
         endDate: String
     ): ResultType<List<AsteroidModel>, ErrorModel>
+
+    suspend fun delete(currentDate: String)
+
 }
