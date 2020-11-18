@@ -13,5 +13,4 @@ class PictureDataRepository(private val pictureDataStoreFactory: PictureDataStor
         val pictureDataStore = pictureDataStoreFactory.create()
         return pictureDataStore.get()
     }
-
 }

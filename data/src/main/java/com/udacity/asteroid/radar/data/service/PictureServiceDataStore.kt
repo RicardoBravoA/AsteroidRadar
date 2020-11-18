@@ -41,6 +41,7 @@ class PictureServiceDataStore(private val asteroidDao: AsteroidDao) :
 
     private suspend fun savePicture(pictureResponse: PictureResponse) =
         withContext(Dispatchers.IO) {
+            asteroidDao.deletePicture()
             asteroidDao.insertPicture(
                 PictureMapper.transformResponseToEntity(pictureResponse)
             )
