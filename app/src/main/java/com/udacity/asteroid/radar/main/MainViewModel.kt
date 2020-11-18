@@ -33,6 +33,27 @@ class MainViewModel(
         )
     }
 
+    fun weekData() {
+        getData(
+            DataDateUtil.currentDate(),
+            DataDateUtil.currentDate(DataDateUtil.DEFAULT_END_DATE_DAYS)
+        )
+    }
+
+    fun today() {
+        getData(
+            DataDateUtil.currentDate(),
+            DataDateUtil.currentDate()
+        )
+    }
+
+    fun saved() {
+        getData(
+            DataDateUtil.currentDate(),
+            DataDateUtil.currentDate()
+        )
+    }
+
     private fun getData(startDate: String, endDate: String) {
         viewModelScope.launch {
             _status.value = NetworkStatus.LOADING
