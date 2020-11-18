@@ -34,6 +34,12 @@ fun ImageView.bindAsteroidStatusImage(isHazardous: Boolean) {
     }
 }
 
+@BindingAdapter("accessibilityPictureOfTheDay")
+fun ImageView.bindAccessibilityPictureOfTheDay(value: String) {
+    contentDescription =
+        context.getString(R.string.nasa_picture_of_day_content_description_format, value)
+}
+
 @BindingAdapter("asteroidStatusImage")
 fun ImageView.bindDetailsStatusImage(isHazardous: Boolean) {
     if (isHazardous) {

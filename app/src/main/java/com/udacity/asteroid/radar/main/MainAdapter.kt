@@ -11,6 +11,7 @@ import com.udacity.asteroid.radar.databinding.ItemMainBinding
 import com.udacity.asteroid.radar.databinding.ItemPictureOfTheDayBinding
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.util.Constants
+import com.udacity.asteroid.radar.util.bindingAdapter.bindAccessibilityPictureOfTheDay
 import com.udacity.asteroid.radar.util.bindingAdapter.bindAsteroidStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.bindImage
 
@@ -78,6 +79,7 @@ class MainAdapter(private val asteroidClick: (asteroidModel: AsteroidModel) -> U
             picture.title?.let {
                 binding.imageOfTheDayTextView.text = it
                 binding.imageOfTheDayTextView.contentDescription = it
+                binding.imageOfTheDay.bindAccessibilityPictureOfTheDay(picture.title)
             }
 
             if (Constants.PICTURE_TYPE == picture.type) {
