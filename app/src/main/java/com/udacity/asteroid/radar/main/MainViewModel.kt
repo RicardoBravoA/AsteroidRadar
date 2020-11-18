@@ -54,11 +54,12 @@ class MainViewModel(
     fun saved() {
         getData(
             DataDateUtil.currentDate(),
-            DataDateUtil.currentDate()
+            DataDateUtil.currentDate(DataDateUtil.DEFAULT_END_DATE_DAYS),
+            true
         )
     }
 
-    private fun getData(startDate: String, endDate: String) {
+    private fun getData(startDate: String, endDate: String, isSavedData: Boolean = false) {
         viewModelScope.launch {
             _status.value = NetworkStatus.LOADING
 
@@ -68,21 +69,43 @@ class MainViewModel(
                     var items = listOf<AsteroidModel>()
                     var picture: PictureModel? = null
 
-                    when (val result = pictureUseCase.get()) {
-                        is ResultType.Success -> {
-                            picture = result.value
+                    if (isSavedData) {
+                        when (val result = pictureOfflineUseCase.get()) {
+                            is ResultType.Success -> {
+                                picture = result.value
+                            }
+                            is ResultType.Error -> {
+                                //Do nothing
+                            }
                         }
-                        is ResultType.Error -> {
-                            //Do nothing
+                    } else {
+                        when (val result = pictureUseCase.get()) {
+                            is ResultType.Success -> {
+                                picture = result.value
+                            }
+                            is ResultType.Error -> {
+                                //Do nothing
+                            }
                         }
                     }
 
-                    when (val result = asteroidUseCase.list(startDate, endDate)) {
-                        is ResultType.Success -> {
-                            items = result.value
+                    if (isSavedData) {
+                        when (val result = asteroidOfflineUseCase.list(startDate, endDate)) {
+                            is ResultType.Success -> {
+                                items = result.value
+                            }
+                            is ResultType.Error -> {
+                                //Do nothing
+                            }
                         }
-                        is ResultType.Error -> {
-                            //Do nothing
+                    } else {
+                        when (val result = asteroidUseCase.list(startDate, endDate)) {
+                            is ResultType.Success -> {
+                                items = result.value
+                            }
+                            is ResultType.Error -> {
+                                //Do nothing
+                            }
                         }
                     }
 

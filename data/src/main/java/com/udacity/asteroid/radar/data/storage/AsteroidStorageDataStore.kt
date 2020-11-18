@@ -17,7 +17,7 @@ class AsteroidStorageDataStore(private val asteroidDao: AsteroidDao) : AsteroidD
     ): ResultType<List<AsteroidModel>, ErrorModel> = withContext(Dispatchers.IO) {
 
         try {
-            val response = asteroidDao.getAsteroidList()
+            val response = asteroidDao.getAsteroidList(startDate, endDate)
             return@withContext ResultType.Success(AsteroidMapper.transformEntityToModel(response))
         } catch (t: Throwable) {
             return@withContext ResultType.Error(ErrorModel())
