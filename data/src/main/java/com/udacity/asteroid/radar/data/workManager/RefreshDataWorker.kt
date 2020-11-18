@@ -7,7 +7,6 @@ import com.udacity.asteroid.radar.data.datastore.AsteroidDataStoreFactory
 import com.udacity.asteroid.radar.data.datastore.PictureDataStoreFactory
 import com.udacity.asteroid.radar.data.repository.AsteroidDataRepository
 import com.udacity.asteroid.radar.data.repository.PictureDataRepository
-import com.udacity.asteroid.radar.data.storage.database.AsteroidDatabase
 import com.udacity.asteroid.radar.data.util.DataDateUtil
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
 import com.udacity.asteroid.radar.domain.usecase.PictureUseCase

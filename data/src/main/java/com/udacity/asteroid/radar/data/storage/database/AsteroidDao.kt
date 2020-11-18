@@ -22,4 +22,7 @@ interface AsteroidDao {
     @Query("delete from picture")
     fun deletePicture()
 
+    @Query("delete from asteroid where date(closeApproachDate) < :currentDate")
+    fun deleteOldAsteroids(currentDate: String)
+
 }
