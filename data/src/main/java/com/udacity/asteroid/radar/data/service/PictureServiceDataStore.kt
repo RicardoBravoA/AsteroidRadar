@@ -1,23 +1,23 @@
 package com.udacity.asteroid.radar.data.service
 
 import com.udacity.asteroid.radar.data.datastore.PictureDataStore
-import com.udacity.asteroid.radar.data.entity.PictureOfTheDayResponse
+import com.udacity.asteroid.radar.data.entity.PictureResponse
 import com.udacity.asteroid.radar.data.mapper.ErrorMapper
-import com.udacity.asteroid.radar.data.mapper.PictureOfTheDayMapper
+import com.udacity.asteroid.radar.data.mapper.PictureMapper
 import com.udacity.asteroid.radar.data.network.ApiManagerMoshi
 import com.udacity.asteroid.radar.data.storage.database.AsteroidDao
 import com.udacity.asteroid.radar.data.util.ErrorUtil
 import com.udacity.asteroid.radar.data.util.RetrofitErrorUtil
 import com.udacity.asteroid.radar.domain.model.ErrorModel
-import com.udacity.asteroid.radar.domain.model.PictureOfTheDayModel
+import com.udacity.asteroid.radar.domain.model.PictureModel
 import com.udacity.asteroid.radar.domain.util.ResultType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PictureOfTheDayServiceDataStore(private val asteroidDao: AsteroidDao) :
+class PictureServiceDataStore(private val asteroidDao: AsteroidDao) :
     PictureDataStore {
 
-    override suspend fun get(): ResultType<PictureOfTheDayModel, ErrorModel> {
+    override suspend fun get(): ResultType<PictureModel, ErrorModel> {
 
         return try {
             val response = ApiManagerMoshi.get().pictureOfTheDay()
@@ -25,7 +25,7 @@ class PictureOfTheDayServiceDataStore(private val asteroidDao: AsteroidDao) :
                 val pictureOfTheDayResponse = response.body()!!
                 savePicture(pictureOfTheDayResponse)
                 ResultType.Success(
-                    PictureOfTheDayMapper.transformResponseToModel(
+                    PictureMapper.transformResponseToModel(
                         pictureOfTheDayResponse
                     )
                 )
@@ -39,10 +39,10 @@ class PictureOfTheDayServiceDataStore(private val asteroidDao: AsteroidDao) :
         }
     }
 
-    private suspend fun savePicture(pictureOfTheDayResponse: PictureOfTheDayResponse) =
+    private suspend fun savePicture(pictureResponse: PictureResponse) =
         withContext(Dispatchers.IO) {
             asteroidDao.insertPicture(
-                PictureOfTheDayMapper.transformResponseToEntity(pictureOfTheDayResponse)
+                PictureMapper.transformResponseToEntity(pictureResponse)
             )
         }
 

@@ -4,12 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "picture")
-data class PictureOfTheDayEntity(
+data class PictureEntity(
     @PrimaryKey
-    val copyright: String,
-    val date: String,
-    val explanation: String,
-    val title: String,
     val url: String,
-    val mediaType: String
+    val mediaType: String,
+    val title: String,
+    val date: String,
+    val explanation: String
 )

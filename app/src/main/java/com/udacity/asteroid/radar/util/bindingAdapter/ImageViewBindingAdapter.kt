@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 import com.udacity.asteroid.radar.R
+import com.udacity.asteroid.radar.data.util.isInternet
 
 @BindingAdapter("imageUrl")
 fun ImageView.bindImage(url: String?) {
@@ -13,7 +14,12 @@ fun ImageView.bindImage(url: String?) {
             .load(url)
             .error(R.drawable.ic_no_photo)
             .into(this)
-        scaleType = ImageView.ScaleType.CENTER_CROP
+        scaleType = if (context.isInternet()) {
+            ImageView.ScaleType.CENTER_CROP
+        } else {
+            ImageView.ScaleType.CENTER_INSIDE
+        }
+
     }
 }
 

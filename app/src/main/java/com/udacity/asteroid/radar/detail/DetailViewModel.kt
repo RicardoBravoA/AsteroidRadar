@@ -11,7 +11,7 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
     val detailItemList: LiveData<List<DetailModel>>
         get() = _detailItemList
 
-    fun transformData(asteroidModel: com.udacity.asteroid.radar.domain.model.AsteroidModel) {
+    fun transformData(asteroidModel: AsteroidModel) {
         _detailItemList.value =
             DetailMapper.transform(getApplication<Application>().baseContext, asteroidModel)
 

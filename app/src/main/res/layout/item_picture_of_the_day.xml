@@ -12,7 +12,7 @@
             android:layout_height="@dimen/image_size"
             android:background="@drawable/placeholder_picture_of_day"
             android:contentDescription="@string/this_is_nasa_s_picture_of_day_showing_nothing_yet"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

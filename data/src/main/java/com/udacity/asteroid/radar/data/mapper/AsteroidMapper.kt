@@ -6,15 +6,6 @@ import com.udacity.asteroid.radar.domain.model.AsteroidModel
 
 object AsteroidMapper {
 
-    /*fun transformResponseToEntity(asteroidResponseList: List<AsteroidResponse>): List<AsteroidEntity> {
-        val asteroidEntityList = mutableListOf<AsteroidEntity>()
-
-        asteroidResponseList.forEach {
-            asteroidEntityList.add(transformAsteroidResponseToEntity(it))
-        }
-        return asteroidEntityList
-    }*/
-
     fun transformAsteroidResponseToEntity(asteroidResponse: AsteroidResponse): AsteroidEntity {
         return AsteroidEntity(
             asteroidResponse.id,
@@ -69,28 +60,6 @@ object AsteroidMapper {
             asteroidResponse.relativeVelocity,
             asteroidResponse.distanceFromEarth,
             asteroidResponse.isPotentiallyHazardous
-        )
-    }
-
-    fun transformModelToResponse(asteroidModelList: List<AsteroidModel>): List<AsteroidResponse> {
-        val asteroidResponseList = mutableListOf<AsteroidResponse>()
-
-        asteroidModelList.forEach {
-            asteroidResponseList.add(transformAsteroidModelToResponse(it))
-        }
-        return asteroidResponseList
-    }
-
-    fun transformAsteroidModelToResponse(asteroidModel: AsteroidModel): AsteroidResponse {
-        return AsteroidResponse(
-            asteroidModel.id,
-            asteroidModel.codename,
-            asteroidModel.closeApproachDate,
-            asteroidModel.absoluteMagnitude,
-            asteroidModel.estimatedDiameter,
-            asteroidModel.relativeVelocity,
-            asteroidModel.distanceFromEarth,
-            asteroidModel.isPotentiallyHazardous
         )
     }
 
