@@ -21,6 +21,6 @@ class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
             val pictureUseCase = PictureUseCase(pictureDataRepository)
             return MainViewModel(asteroidUseCase, pictureUseCase) as T
         }
-        throw IllegalArgumentException("Unable to construct viewmodel")
+        throw IllegalArgumentException("Unable to construct view model")
     }
 }

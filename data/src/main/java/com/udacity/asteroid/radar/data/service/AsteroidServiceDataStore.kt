@@ -6,7 +6,6 @@ import com.udacity.asteroid.radar.data.mapper.AsteroidMapper
 import com.udacity.asteroid.radar.data.mapper.ErrorMapper
 import com.udacity.asteroid.radar.data.network.ApiManager
 import com.udacity.asteroid.radar.data.storage.database.AsteroidDao
-import com.udacity.asteroid.radar.data.util.ErrorUtil
 import com.udacity.asteroid.radar.data.util.NetworkUtils
 import com.udacity.asteroid.radar.data.util.RetrofitErrorUtil
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
@@ -33,22 +32,6 @@ class AsteroidServiceDataStore(private val asteroidDao: AsteroidDao) :
             val error = RetrofitErrorUtil.parseError(response)!!
             ResultType.Error(ErrorMapper.transformResponseToModel(error))
         }
-
-        /*return try {
-            val response = ApiManager.get().feed(startDate, endDate)
-            if (response.isSuccessful) {
-                val asteroidString = response.body()
-                val asteroidList = NetworkUtils.parseStringToAsteroidList(asteroidString!!)
-                saveAsteroid(asteroidList)
-                ResultType.Success(AsteroidMapper.transformResponseToModel(asteroidList))
-            } else {
-                val error = RetrofitErrorUtil.parseError(response)!!
-                ResultType.Error(ErrorMapper.transformResponseToModel(error))
-            }
-
-        } catch (t: Throwable) {
-            ResultType.Error(ErrorUtil.errorHandler(t))
-        }*/
     }
 
     private suspend fun saveAsteroid(list: List<AsteroidResponse>) = withContext(Dispatchers.IO) {
@@ -59,7 +42,6 @@ class AsteroidServiceDataStore(private val asteroidDao: AsteroidDao) :
                 )
             )
         }
-
     }
 
 }

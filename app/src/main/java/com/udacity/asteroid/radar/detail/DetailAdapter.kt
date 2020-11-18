@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroid.radar.databinding.ItemDetailBinding
 import com.udacity.asteroid.radar.databinding.ItemDetailPictureBinding
-import com.udacity.asteroid.radar.domain.model.DetailItem
 import com.udacity.asteroid.radar.util.bindingAdapter.bindDetailsStatusImage
 import com.udacity.asteroid.radar.util.bindingAdapter.show
 

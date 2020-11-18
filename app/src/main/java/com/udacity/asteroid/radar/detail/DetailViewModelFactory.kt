@@ -10,6 +10,6 @@ class DetailViewModelFactory(val app: Application) : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             return DetailViewModel(app) as T
         }
-        throw IllegalArgumentException("Unable to construct viewmodel")
+        throw IllegalArgumentException("Unable to construct view model")
     }
 }

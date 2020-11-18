@@ -11,10 +11,4 @@ object ErrorMapper {
         )
     }
 
-    fun transformModelToResponse(errorModel: ErrorModel): ErrorResponse {
-        return ErrorResponse(
-            errorModel.message
-        )
-    }
-
 }
