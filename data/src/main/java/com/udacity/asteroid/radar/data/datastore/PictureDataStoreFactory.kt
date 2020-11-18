@@ -1,20 +1,21 @@
 package com.udacity.asteroid.radar.data.datastore
 
 import android.content.Context
-import com.udacity.asteroid.radar.data.service.PictureOfTheDayServiceDataStore
+import com.udacity.asteroid.radar.data.service.PictureServiceDataStore
+import com.udacity.asteroid.radar.data.storage.PictureStorageDataStore
 import com.udacity.asteroid.radar.data.storage.database.AsteroidDatabase
 import com.udacity.asteroid.radar.data.util.isInternet
 
-class PictureOfTheDayDataStoreFactory(private val context: Context) {
+class PictureDataStoreFactory(private val context: Context) {
 
     fun create(): PictureDataStore {
         val asteroidDatabase = AsteroidDatabase.getDatabase(context)
         val value = if (context.isInternet()) Preference.CLOUD else Preference.DB
 
         return if (Preference.CLOUD == value) {
-            PictureOfTheDayServiceDataStore(asteroidDatabase.asteroidDao)
+            PictureServiceDataStore(asteroidDatabase.asteroidDao)
         } else {
-            PictureOfTheDayServiceDataStore(asteroidDatabase.asteroidDao)
+            PictureStorageDataStore(asteroidDatabase.asteroidDao)
         }
     }
 
