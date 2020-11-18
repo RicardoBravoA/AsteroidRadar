@@ -23,7 +23,18 @@ class AsteroidServiceDataStore(private val asteroidDao: AsteroidDao) :
         endDate: String
     ): ResultType<List<AsteroidModel>, ErrorModel> {
 
-        return try {
+        val response = ApiManager.get().feed(startDate, endDate)
+        return if (response.isSuccessful) {
+            val asteroidString = response.body()
+            val asteroidList = NetworkUtils.parseStringToAsteroidList(asteroidString!!)
+            saveAsteroid(asteroidList)
+            ResultType.Success(AsteroidMapper.transformResponseToModel(asteroidList))
+        } else {
+            val error = RetrofitErrorUtil.parseError(response)!!
+            ResultType.Error(ErrorMapper.transformResponseToModel(error))
+        }
+
+        /*return try {
             val response = ApiManager.get().feed(startDate, endDate)
             if (response.isSuccessful) {
                 val asteroidString = response.body()
@@ -37,7 +48,7 @@ class AsteroidServiceDataStore(private val asteroidDao: AsteroidDao) :
 
         } catch (t: Throwable) {
             ResultType.Error(ErrorUtil.errorHandler(t))
-        }
+        }*/
     }
 
     private suspend fun saveAsteroid(list: List<AsteroidResponse>) = withContext(Dispatchers.IO) {

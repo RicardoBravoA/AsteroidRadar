@@ -5,6 +5,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PictureModel(
-    val copyright: String, val date: String, val explanation: String,
-    val title: String, val url: String, val mediaType: String
+    val url: String,
+    val mediaType: String,
+    val title: String,
+    val date: String,
+    val explanation: String
 ) : Parcelable

@@ -13,11 +13,10 @@ object NetworkUtils {
 
     fun parseImageOfTheDay(context: Context): PictureModel {
         val response = JsonUtils.loadJSONFromAsset(context, "image_of_day.json")
-        var imageOfTheDay = PictureModel("", "", "", "", "", "")
+        var imageOfTheDay = PictureModel("", "", "", "", "")
 
         response?.let {
             val jsonObject = JSONObject(response)
-            val copyright = jsonObject.getString("copyright")
             val date = jsonObject.getString("date")
             val explanation = jsonObject.getString("explanation")
             val title = jsonObject.getString("title")
@@ -25,12 +24,11 @@ object NetworkUtils {
             val mediaType = jsonObject.getString("media_type")
 
             imageOfTheDay = PictureModel(
-                copyright,
-                date,
-                explanation,
-                title,
                 url,
-                mediaType
+                mediaType,
+                title,
+                date,
+                explanation
             )
         }
         return imageOfTheDay

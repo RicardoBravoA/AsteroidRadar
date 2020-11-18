@@ -8,45 +8,31 @@ object PictureMapper {
 
     fun transformResponseToEntity(pictureResponse: PictureResponse): PictureEntity {
         return PictureEntity(
-            pictureResponse.copyright,
-            pictureResponse.date,
-            pictureResponse.explanation,
-            pictureResponse.title,
             pictureResponse.url,
-            pictureResponse.mediaType
+            pictureResponse.mediaType,
+            pictureResponse.title,
+            pictureResponse.date,
+            pictureResponse.explanation
         )
     }
 
     fun transformEntityToModel(pictureEntity: PictureEntity): PictureModel {
         return PictureModel(
-            pictureEntity.copyright,
-            pictureEntity.date,
-            pictureEntity.explanation,
-            pictureEntity.title,
             pictureEntity.url,
-            pictureEntity.mediaType
+            pictureEntity.mediaType,
+            pictureEntity.title,
+            pictureEntity.date,
+            pictureEntity.explanation
         )
     }
 
     fun transformResponseToModel(pictureResponse: PictureResponse): PictureModel {
         return PictureModel(
-            pictureResponse.copyright,
-            pictureResponse.date,
-            pictureResponse.explanation,
-            pictureResponse.title,
             pictureResponse.url,
-            pictureResponse.mediaType
-        )
-    }
-
-    fun transformModelToResponse(pictureModel: PictureModel): PictureResponse {
-        return PictureResponse(
-            pictureModel.copyright,
-            pictureModel.date,
-            pictureModel.explanation,
-            pictureModel.title,
-            pictureModel.url,
-            pictureModel.mediaType
+            pictureResponse.mediaType,
+            pictureResponse.title,
+            pictureResponse.date,
+            pictureResponse.explanation
         )
     }
 
