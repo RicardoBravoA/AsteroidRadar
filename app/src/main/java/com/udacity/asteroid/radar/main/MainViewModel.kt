@@ -42,16 +42,9 @@ class MainViewModel(
                     when (val result = pictureUseCase.get()) {
                         is ResultType.Success -> {
                             picture = result.value
-                            val list = mutableListOf<MainItem>()
-                            items.forEach {
-                                list.add(MainItem.Item(it))
-                            }
-                            _asteroidList.postValue(list)
-                            _status.value = NetworkStatus.DONE
                         }
                         is ResultType.Error -> {
-                            _asteroidList.value = arrayListOf()
-                            _status.value = NetworkStatus.ERROR
+                            //Do nothing
                         }
                     }
 
@@ -60,8 +53,7 @@ class MainViewModel(
                             items = result.value
                         }
                         is ResultType.Error -> {
-                            _asteroidList.value = arrayListOf()
-                            _status.value = NetworkStatus.ERROR
+                            //Do nothing
                         }
                     }
 
