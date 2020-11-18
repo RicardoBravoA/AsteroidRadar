@@ -16,7 +16,7 @@ interface AsteroidDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPicture(picture: PictureEntity)
 
-    @Query("select * from asteroid")
+    @Query("select * from asteroid order by date(closeApproachDate)")
     fun getAsteroidList(): List<AsteroidEntity>
 
     @Query("select * from picture")
