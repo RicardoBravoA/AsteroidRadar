@@ -19,4 +19,9 @@ class AsteroidOfflineDataRepository(private val context: Context) :
         return AsteroidStorageDataStore(asteroidDatabase.asteroidDao).list(startDate, endDate)
     }
 
+    override suspend fun delete(currentDate: String) {
+        val asteroidDatabase = AsteroidDatabase.getDatabase(context)
+        return AsteroidStorageDataStore(asteroidDatabase.asteroidDao).delete(currentDate)
+    }
+
 }
