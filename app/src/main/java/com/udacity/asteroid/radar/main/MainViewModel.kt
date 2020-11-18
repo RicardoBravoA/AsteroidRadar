@@ -5,6 +5,7 @@ import com.udacity.asteroid.radar.data.util.DataDateUtil
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.domain.model.PictureModel
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
+import com.udacity.asteroid.radar.domain.usecase.PictureOfflineUseCase
 import com.udacity.asteroid.radar.domain.usecase.PictureUseCase
 import com.udacity.asteroid.radar.domain.util.ResultType
 import com.udacity.asteroid.radar.mapper.MainMapper
@@ -14,7 +15,8 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(
     private val asteroidUseCase: AsteroidUseCase,
-    private val pictureUseCase: PictureUseCase
+    private val pictureUseCase: PictureUseCase,
+    private val pictureOfflineUseCase: PictureOfflineUseCase
 ) : ViewModel() {
 
     private val _status = MutableLiveData<NetworkStatus>()
