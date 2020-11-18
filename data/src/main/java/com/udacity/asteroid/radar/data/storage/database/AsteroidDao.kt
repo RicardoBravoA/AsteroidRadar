@@ -8,16 +8,13 @@ import com.udacity.asteroid.radar.data.storage.entity.PictureEntity
 interface AsteroidDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg asteroids: AsteroidEntity)
-
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAsteroid(asteroid: AsteroidEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPicture(picture: PictureEntity)
 
-    @Query("select * from asteroid")
-    fun getAsteroidList(): List<AsteroidEntity>
+    @Query("select * from asteroid where date(closeApproachDate) between :startDate and :endDate order by date(closeApproachDate)")
+    fun getAsteroidList(startDate: String, endDate: String): List<AsteroidEntity>
 
     @Query("select * from picture")
     fun getPicture(): PictureEntity

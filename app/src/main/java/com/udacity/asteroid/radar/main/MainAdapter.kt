@@ -75,7 +75,10 @@ class MainAdapter(private val asteroidClick: (asteroidModel: AsteroidModel) -> U
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(picture: MainItem.Picture) {
-            binding.imageOfTheDayTextView.text = picture.title
+            picture.title?.let {
+                binding.imageOfTheDayTextView.text = it
+            }
+
             if (Constants.PICTURE_TYPE == picture.type) {
                 binding.imageOfTheDay.bindImage(picture.url)
             } else {
