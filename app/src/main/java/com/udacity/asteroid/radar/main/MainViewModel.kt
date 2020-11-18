@@ -30,7 +30,6 @@ class MainViewModel(
         get() = _asteroidList
 
     init {
-//        getFeed("2020-11-16", "2020-11-23")
         getData(
             DataDateUtil.currentDate(),
             DataDateUtil.currentDate(DataDateUtil.DEFAULT_END_DATE_DAYS)
