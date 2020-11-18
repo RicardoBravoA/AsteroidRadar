@@ -6,6 +6,7 @@ import com.udacity.asteroid.radar.domain.model.PictureModel
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
 import com.udacity.asteroid.radar.domain.usecase.PictureUseCase
 import com.udacity.asteroid.radar.domain.util.ResultType
+import com.udacity.asteroid.radar.mapper.MainMapper
 import com.udacity.asteroid.radar.util.NetworkStatus
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
@@ -64,15 +65,7 @@ class MainViewModel(
                         }
                     }
 
-                    val list = mutableListOf<MainItem>()
-                    picture?.let {
-                        list.add(MainItem.Picture(it.url, it.mediaType))
-                    }
-
-                    items.forEach {
-                        list.add(MainItem.Item(it))
-                    }
-                    _asteroidList.postValue(list)
+                    _asteroidList.postValue(MainMapper.transform(items, picture))
                     _status.value = NetworkStatus.DONE
                 }
             } catch (e: Exception) {
