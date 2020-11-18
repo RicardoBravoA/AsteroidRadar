@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.udacity.asteroid.radar.data.datastore.AsteroidDataStoreFactory
 import com.udacity.asteroid.radar.data.datastore.PictureDataStoreFactory
 import com.udacity.asteroid.radar.data.repository.AsteroidDataRepository
+import com.udacity.asteroid.radar.data.repository.AsteroidOfflineDataRepository
 import com.udacity.asteroid.radar.data.repository.PictureDataRepository
 import com.udacity.asteroid.radar.data.repository.PictureOfflineDataRepository
+import com.udacity.asteroid.radar.domain.usecase.AsteroidOfflineUseCase
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
 import com.udacity.asteroid.radar.domain.usecase.PictureOfflineUseCase
 import com.udacity.asteroid.radar.domain.usecase.PictureUseCase
@@ -19,13 +21,21 @@ class MainViewModelFactory(val app: Application) : ViewModelProvider.Factory {
             val asteroidDataRepository = AsteroidDataRepository(AsteroidDataStoreFactory(app))
             val asteroidUseCase = AsteroidUseCase(asteroidDataRepository)
 
+            val asteroidOfflineDataRepository = AsteroidOfflineDataRepository(app)
+            val asteroidOfflineUseCase = AsteroidOfflineUseCase(asteroidOfflineDataRepository)
+
             val pictureDataRepository = PictureDataRepository(PictureDataStoreFactory(app))
             val pictureUseCase = PictureUseCase(pictureDataRepository)
 
             val pictureOfflineDataRepository = PictureOfflineDataRepository(app)
             val pictureOfflineUseCase = PictureOfflineUseCase(pictureOfflineDataRepository)
 
-            return MainViewModel(asteroidUseCase, pictureUseCase, pictureOfflineUseCase) as T
+            return MainViewModel(
+                asteroidUseCase,
+                pictureUseCase,
+                pictureOfflineUseCase,
+                asteroidOfflineUseCase
+            ) as T
         }
         throw IllegalArgumentException("Unable to construct view model")
     }
