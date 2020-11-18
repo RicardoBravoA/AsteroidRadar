@@ -1,6 +1,7 @@
 package com.udacity.asteroid.radar.main
 
 import androidx.lifecycle.*
+import com.udacity.asteroid.radar.data.util.DataDateUtil
 import com.udacity.asteroid.radar.domain.model.AsteroidModel
 import com.udacity.asteroid.radar.domain.model.PictureModel
 import com.udacity.asteroid.radar.domain.usecase.AsteroidUseCase
@@ -26,7 +27,10 @@ class MainViewModel(
 
     init {
 //        getFeed("2020-11-16", "2020-11-23")
-        getData("2020-11-17", "2020-11-24")
+        getData(
+            DataDateUtil.currentDate(),
+            DataDateUtil.currentDate(DataDateUtil.DEFAULT_END_DATE_DAYS)
+        )
     }
 
     private fun getData(startDate: String, endDate: String) {

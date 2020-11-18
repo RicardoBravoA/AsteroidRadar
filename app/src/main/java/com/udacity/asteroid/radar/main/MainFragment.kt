@@ -41,9 +41,6 @@ class MainFragment : Fragment() {
             }
         })
 
-        Log.i("z- currentDate", DataDateUtil.currentDate())
-        Log.i("z- nextDate", DataDateUtil.currentDate(DataDateUtil.DEFAULT_END_DATE_DAYS))
-
         return binding.root
     }
 
