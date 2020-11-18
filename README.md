@@ -1,6 +1,6 @@
 # Asteroid radar
 
-Second project of the [Android Kotlin Developer Nanodegree course](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940), has offline support.
+Second project of the [Android Kotlin Developer Nanodegree course](https://www.udacity.com/course/android-kotlin-developer-nanodegree--nd940), has offline support, portraid and landscape support.
 
 ## Getting Started
 
